@@ -4,10 +4,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const menuItems = document.querySelectorAll(".menu-item");
 
     menuToggle.addEventListener("click", function () {
-        if (menu.style.right === "0px") {
-            menu.style.right = "-200px";
+        if (menu.style.left === "0px") {
+            menu.style.left = "-250px";
         } else {
-            menu.style.right = "0px";
+            menu.style.left = "0px";
         }
     });
 
@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
+
        // Redirige al index.html(cierre de sesion)
     if (logoutButton) {
         logoutButton.addEventListener("click", function () {
