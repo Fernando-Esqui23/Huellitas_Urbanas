@@ -22,4 +22,11 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
+       // Redirige al index.html(cierre de sesion)
+    if (logoutButton) {
+        logoutButton.addEventListener("click", function () {
+            window.location.href = 'index.html';  
+        });
+    }
+    
 });
