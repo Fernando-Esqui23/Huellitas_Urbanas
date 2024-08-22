@@ -108,6 +108,7 @@ if ($search !== "") {
         .actions a:hover {
             text-decoration: underline;
         }
+        
     </style>
 </head>
 <body>
