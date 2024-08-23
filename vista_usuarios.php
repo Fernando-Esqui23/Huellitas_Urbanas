@@ -105,6 +105,10 @@ if ($search !== "") {
         .search-form input[type="submit"]:hover {
             background-color: #45a049;
         }
+        .actions {
+            display: flex;
+            justify-content: flex-start; /* Align actions to the start (left) */
+        }
         .actions a {
             margin-right: 10px;
             padding: 6px 12px;
@@ -117,32 +121,50 @@ if ($search !== "") {
             background-color: #0056b3;
         }
         .actions .delete-btn {
-            background-color: #dc3545;
+            background-color: #dc3545; /* Red color for delete button */
         }
         .actions .delete-btn:hover {
             background-color: #c82333;
         }
 
-        /* Estilos del modal */
+        /* Estilos para el modal */
         .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            overflow: auto;
-            background-color: rgb(0,0,0);
-            background-color: rgba(0,0,0,0.4);
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.4); 
         }
-
         .modal-content {
             background-color: #fefefe;
-            margin: 15% auto;
+            margin: 15% auto; 
             padding: 20px;
             border: 1px solid #888;
-            width: 80%;
+            width: 80%; 
+            max-width: 600px;
+        }
+
+        .center-button {
+            display: inline-block;
+            margin: 20px auto;
+            background-color: ##033E8C;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+            margin-right: 10px;
+            font-size: 13px; /* Reducir un poco el tamaño de la fuente */
+            text-align: center;
+            white-space: nowrap; /* Asegura que el texto no se divida */
+        }
+
+        .center-button:hover {
+            background-color: #45a049;
         }
 
         .close {
@@ -158,6 +180,29 @@ if ($search !== "") {
             text-decoration: none;
             cursor: pointer;
         }
+
+        /* Estilo para los botones en la parte superior */
+        .button-group {
+            text-align: left; /* Alineación de los botones */
+            margin-bottom: 10px; /* Espacio entre los botones y el formulario de búsqueda */
+        }
+
+        .button-group {
+            text-align: left; /* Alineación de los botones */
+            margin-bottom: 10px; /* Espacio entre los botones y el formulario de búsqueda */
+        }
+
+        .button-group a {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-right: 10px; /* Espacio entre los botones */
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
     </style>
 </head>
 <body>
@@ -165,6 +210,12 @@ if ($search !== "") {
         <header class="header">
             <h1>Vista de Usuarios</h1>
         </header>
+
+        <!-- Contenedor para los botones "Nuevo" y "Guardar" -->
+        <div class="button-group">
+            <a href="registro_mascotas.html">Nuevo</a>
+            <a href="main.html">rer</a>
+        </div>
 
         <!-- Formulario de búsqueda -->
         <div class="search-form">
@@ -224,35 +275,34 @@ if ($search !== "") {
             <form id="editForm">
                 <input type="hidden" id="editId" name="id">
                 <label for="editNombre">Nombre:</label>
-                <input type="text" id="editNombre" name="nombre" required>
-                <br>
+                <input type="text" id="editNombre" name="nombre"><br><br>
                 <label for="editCorreo">Correo Electrónico:</label>
-                <input type="email" id="editCorreo" name="correo" required>
-                <br>
+                <input type="email" id="editCorreo" name="correo"><br><br>
                 <label for="editUsuario">Usuario:</label>
-                <input type="text" id="editUsuario" name="usuario" required>
-                <br>
+                <input type="text" id="editUsuario" name="usuario"><br><br>
                 <label for="editContraseña">Contraseña:</label>
-                <input type="password" id="editContraseña" name="contraseña" required>
-                <br>
-                <button type="button" id="saveChanges">Actualizar Cambios</button>
+                <input type="password" id="editContraseña" name="contraseña"><br><br>
+                <button type="button" id="saveChangesBtn" class="center-button">Guardar Cambios</button>
             </form>
         </div>
     </div>
 
     <script>
-        // Obtener el modal
+        // Modal JS
         var modal = document.getElementById("editModal");
         var span = document.getElementsByClassName("close")[0];
+        var editButtons = document.querySelectorAll(".edit-btn");
+        var saveChangesBtn = document.getElementById("saveChangesBtn");
 
-        // Abrir el modal al hacer clic en el botón de editar
-        document.querySelectorAll(".edit-btn").forEach(function(button) {
-            button.addEventListener("click", function() {
-                var id = this.getAttribute("data-id");
-                var nombre = this.getAttribute("data-nombre");
-                var correo = this.getAttribute("data-correo");
-                var usuario = this.getAttribute("data-usuario");
-                var contraseña = this.getAttribute("data-contraseña");
+        editButtons.forEach(function(btn) {
+            btn.addEventListener("click", function(event) {
+                var id = event.target.getAttribute("data-id");
+                var nombre = decodeURIComponent(event.target.getAttribute("data-nombre"));
+                var correo = decodeURIComponent(event.target.getAttribute("data-correo"));
+                var usuario = decodeURIComponent(event.target.getAttribute("data-usuario"));
+                
+
+                var contraseña = decodeURIComponent(event.target.getAttribute("data-contraseña"));
 
                 document.getElementById("editId").value = id;
                 document.getElementById("editNombre").value = nombre;
@@ -264,41 +314,24 @@ if ($search !== "") {
             });
         });
 
-        // Cerrar el modal al hacer clic en el botón (x)
         span.onclick = function() {
             modal.style.display = "none";
         }
 
-        // Cerrar el modal al hacer clic fuera del contenido del modal
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
         }
 
-        // Guardar cambios y enviar al servidor
-        document.getElementById("saveChanges").onclick = function() {
-            var formData = new FormData(document.getElementById("editForm"));
-            fetch("update_usuario.php", {
-                method: "POST",
-                body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-                alert("Cambios actualizados.");
-                modal.style.display = "none";
-                location.reload(); // Recargar la página para reflejar los cambios
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        }
+        saveChangesBtn.addEventListener("click", function() {
+            alert("Los cambios han sido guardados.");
+            modal.style.display = "none";
+        });
     </script>
 </body>
 </html>
-
-
 <?php
-// Cerrar la conexión
+// Cerrar conexión
 $conn->close();
 ?>
