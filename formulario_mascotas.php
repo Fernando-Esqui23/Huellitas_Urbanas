@@ -4,26 +4,26 @@ $servername = "localhost";
 $username = "root"; // Reemplaza con tu usuario de MySQL
 $password = ""; // Reemplaza con tu contraseña de MySQL
 $database = "usuarios"; // La base de datos que ya tienes configurada
-
+ 
 // Crear conexión
 $conn = new mysqli($servername, $username, $password, $database);
-
+ 
 // Verificar la conexión
 if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);
 }
-
+ 
 // Manejar la eliminación de un registro
 if (isset($_GET['action']) && $_GET['action'] == 'delete') {
     $id = $_GET['id'];
-
+ 
     $sql = "DELETE FROM mascotas WHERE id=?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $stmt->close();
 }
-
+ 
 // Manejar la inserción o actualización de un registro
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = isset($_POST['id']) ? $_POST['id'] : null;
@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $edad = $_POST['edad'];
     $discapacidad = isset($_POST['discapacidad']) ? $_POST['discapacidad'] : NULL;
     $detalles_discapacidad = isset($_POST['detalles-discapacidad']) ? $_POST['detalles-discapacidad'] : NULL;
-
+ 
     // Verificar si el registro ya existe
     if ($id) {
         // Actualizar el registro existente
@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt_check->bind_param("ss", $nombre, $fecha_rescate);
         $stmt_check->execute();
         $result_check = $stmt_check->get_result();
-
+ 
         if ($result_check->num_rows > 0) {
             echo "El registro ya existe.";
             $stmt_check->close();
@@ -55,13 +55,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
         $stmt_check->close();
-
+ 
         // Insertar un nuevo registro
         $sql = "INSERT INTO mascotas (tipo_mascota, nombre, fecha_rescate, edad, discapacidad, detalles_discapacidad) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ssssss", $tipo_mascota, $nombre, $fecha_rescate, $edad, $discapacidad, $detalles_discapacidad);
     }
-
+ 
     // Ejecutar la consulta y verificar el resultado
     if ($stmt->execute()) {
         // Redirigir a la vista de mascotas después de guardar
@@ -70,9 +70,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Error: " . $stmt->error;
     }
-
+ 
     // Cerrar la consulta
     $stmt->close();
     $conn->close();
-    
+   
 }
+
