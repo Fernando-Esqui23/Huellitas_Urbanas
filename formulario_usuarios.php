@@ -30,7 +30,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->close();
 
     if ($count > 0) {
-        echo "<script>alert('El correo electrónico ya está registrado.');</script>";
+        // Enviar un mensaje de alerta y mantener al usuario en la misma página
+        echo "<script>
+                alert('El correo electrónico ya está registrado.');
+                window.location.href = 'formulario_usuarios.php';
+              </script>";
     } else {
         // Preparar la consulta SQL para insertar
         $sql = "INSERT INTO usuarios (nombre, correo, usuario, contraseña) VALUES (?, ?, ?, ?)";
@@ -40,11 +44,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Intentar ejecutar la consulta
         try {
             if ($stmt->execute()) {
-                header("Location: vista_usuarios.php");
-                exit(); // Asegura que el script se detenga después de la redirección
+                // Enviar un mensaje de éxito y mantener al usuario en la misma página
+                echo "<script>
+                        alert('Registro guardado con éxito.');
+                        window.location.href = 'formulario_usuarios.php';
+                      </script>";
             }
         } catch (mysqli_sql_exception $e) {
-            echo "<script>alert('Error: " . $e->getMessage() . "');</script>";
+            echo "<script>
+                    alert('Error: " . $e->getMessage() . "');
+                    window.location.href = 'formulario_usuarios.php';
+                  </script>";
         }
 
         // Cerrar la consulta

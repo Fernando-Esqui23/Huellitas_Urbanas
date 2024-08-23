@@ -128,6 +128,39 @@ if ($search !== "") {
         .actions .delete-btn:hover {
             background-color: #c82333;
         }
+
+        /* Estilos para el modal */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.4); 
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; 
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; 
+            max-width: 600px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -175,7 +208,7 @@ if ($search !== "") {
                                 <td><?php echo htmlspecialchars($row['discapacidad']); ?></td>
                                 <td><?php echo htmlspecialchars($row['detalles_discapacidad']); ?></td>
                                 <td class="actions">
-                                    <a href="formulario_mascotas.php?id=<?php echo urlencode($row['id']); ?>">Editar</a>
+                                    <a href="#" class="edit-btn" data-id="<?php echo htmlspecialchars($row['id']); ?>" data-tipo="<?php echo htmlspecialchars($row['tipo_mascota']); ?>" data-nombre="<?php echo htmlspecialchars($row['nombre']); ?>" data-fecha="<?php echo htmlspecialchars($row['fecha_rescate']); ?>" data-edad="<?php echo htmlspecialchars($row['edad']); ?>" data-discapacidad="<?php echo htmlspecialchars($row['discapacidad']); ?>" data-detalles="<?php echo htmlspecialchars($row['detalles_discapacidad']); ?>">Editar</a>
                                     <a href="vista_mascotas.php?action=delete&id=<?php echo urlencode($row['id']); ?>" class="delete-btn" onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?');">Eliminar</a>
                                 </td>
                             </tr>
@@ -189,10 +222,97 @@ if ($search !== "") {
             </table>
         </div>
     </div>
+
+    <!-- Modal -->
+   <!-- Modal -->
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Editar Mascota</h2>
+        <form id="editForm">
+            <input type="hidden" id="editId" name="id">
+            <label for="editTipo">Tipo de Mascota:</label>
+            <input type="text" id="editTipo" name="tipo_mascota" required>
+            <br>
+            <label for="editNombre">Nombre:</label>
+            <input type="text" id="editNombre" name="nombre" required>
+            <br>
+            <label for="editFecha">Fecha de Rescate:</label>
+            <input type="date" id="editFecha" name="fecha_rescate" required>
+            <br>
+            <label for="editEdad">Edad:</label>
+            <input type="number" id="editEdad" name="edad" required>
+            <br>
+            <label for="editDiscapacidad">Discapacidad:</label>
+            <input type="text" id="editDiscapacidad" name="discapacidad">
+            <br>
+            <label for="editDetalles">Detalles de Discapacidad:</label>
+            <input type="text" id="editDetalles" name="detalles_discapacidad">
+            <br>
+            <button type="button" id="saveChanges">Actualizar Cambios</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Obtener el modal
+    var modal = document.getElementById("editModal");
+    var span = document.getElementsByClassName("close")[0];
+
+    // Abrir el modal al hacer clic en el botón de editar
+    document.querySelectorAll(".edit-btn").forEach(function(button) {
+        button.addEventListener("click", function() {
+            var id = this.getAttribute("data-id");
+            var tipo = this.getAttribute("data-tipo");
+            var nombre = this.getAttribute("data-nombre");
+            var fecha = this.getAttribute("data-fecha");
+            var edad = this.getAttribute("data-edad");
+            var discapacidad = this.getAttribute("data-discapacidad");
+            var detalles = this.getAttribute("data-detalles");
+
+            document.getElementById("editId").value = id;
+            document.getElementById("editTipo").value = tipo;
+            document.getElementById("editNombre").value = nombre;
+            document.getElementById("editFecha").value = fecha;
+            document.getElementById("editEdad").value = edad;
+            document.getElementById("editDiscapacidad").value = discapacidad;
+            document.getElementById("editDetalles").value = detalles;
+
+            modal.style.display = "block";
+        });
+    });
+
+    // Cerrar el modal al hacer clic en el botón (x)
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // Cerrar el modal al hacer clic fuera del contenido del modal
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    // Guardar cambios y enviar al servidor
+    document.getElementById("saveChanges").onclick = function() {
+        var formData = new FormData(document.getElementById("editForm"));
+        fetch("update_mascota.php", {
+            method: "POST",
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            alert("Cambios actualizados.");
+            modal.style.display = "none";
+            location.reload(); // Recargar la página para reflejar los cambios
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+</script>
+
 </body>
 </html>
-<?php
-// Cerrar la conexión
-$conn->close();
-?>
 
