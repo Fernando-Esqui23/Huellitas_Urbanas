@@ -29,9 +29,11 @@ $stmt = $conn->prepare($sql);
 $stmt->bind_param("ssssss", $tipo_mascota, $nombre, $fecha_rescate, $edad, $discapacidad, $detalles_discapacidad);
 
 
-// Ejecutar la consulta y verificar el resultado
-if ($stmt->execute()) {
-    echo "Registro guardado con éxito";
+ // Ejecutar la consulta y verificar el resultado
+ if ($stmt->execute()) {
+    // Redirigir a la vista de mascotas después de guardar
+    header("Location: vista_mascotas.php");
+    exit();
 } else {
     echo "Error: " . $stmt->error;
 }

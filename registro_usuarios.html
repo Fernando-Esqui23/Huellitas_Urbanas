@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Usuarios</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Formulario de Usuarios</h1>
+        </header>
+        <div class="form-container">
+            <img src="images/iconomascota.png" alt="Imagen Pequeña" class="small-image">
+            <form action="formulario_usuarios.php" method="post">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+                
+                <label for="correo">Correo Electrónico:</label>
+                <input type="email" id="correo" name="correo" required>
+                
+                <label for="usuario">Usuario:</label>
+                <input type="text" id="usuario" name="usuario" required>
+                
+                <label for="contraseña">Contraseña:</label>
+                <input type="password" id="contraseña" name="contraseña" required>
+                
+                <div class="buttons">
+                    <button type="submit">Guardar</button>
+                    <button type="button" class="logout">Cancelar</button>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+</body>
+</html>
