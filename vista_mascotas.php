@@ -59,75 +59,96 @@ if ($search !== "") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vista de Mascotas</title>
+    <title>Vista de Usuarios</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         /* Estilos básicos para mejorar la apariencia */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        .container {
-            max-width: 1200px;
-            margin: auto;
-        }
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .records {
-            margin-top: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-        table, th, td {
-            border: 1px solid #dddddd;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-        }
-        .search-form {
-            margin-bottom: 20px;
-        }
-        .search-form input[type="text"] {
-            padding: 6px;
-            width: 200px;
-        }
-        .search-form input[type="submit"] {
-            padding: 6px 12px;
-        }
-        .actions a {
-            margin-right: 10px;
-            text-decoration: none;
-            color: blue;
-        }
-        .actions a:hover {
-            text-decoration: underline;
-        }
-        
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+.container {
+    max-width: 1200px;
+    margin: auto;
+}
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.records {
+    margin-top: 20px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+table, th, td {
+    border: 1px solid #dddddd;
+}
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+.search-form {
+    margin-bottom: 20px;
+}
+.search-form input[type="text"] {
+    padding: 6px;
+    width: 200px;
+}
+.search-form input[type="submit"] {
+    padding: 6px 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+.search-form input[type="submit"]:hover {
+    background-color: #45a049;
+}
+.actions {
+    display: flex;
+    justify-content: flex-start; /* Align actions to the start (left) */
+}
+.actions a {
+    margin-right: 10px;
+    padding: 6px 12px;
+    text-decoration: none;
+    color: white;
+    background-color: #007bff;
+    border-radius: 4px;
+}
+.actions a:hover {
+    background-color: #0056b3;
+}
+.actions .delete-btn {
+    background-color: #dc3545; /* Red color for delete button */
+}
+.actions .delete-btn:hover {
+    background-color: #c82333;
+}
+
     </style>
 </head>
 <body>
     <div class="container">
         <header class="header">
-            <h1>Vista de Mascotas</h1>
+            <h1>Vista de Usuarios</h1>
         </header>
 
         <!-- Formulario de búsqueda -->
         <div class="search-form">
-            <form method="GET" action="vista_mascotas.php">
+            <form method="GET" action="vista_usuarios.php">
                 <label for="search">Buscar por Nombre:</label>
                 <input type="text" id="search" name="search" value="<?php echo htmlspecialchars($search); ?>">
                 <input type="submit" value="Buscar">
                 <?php if ($search !== ""): ?>
-                    <a href="vista_mascotas.php">Mostrar Todos</a>
+                    <a href="vista_usuarios.php">Mostrar Todos</a>
                 <?php endif; ?>
             </form>
         </div>
+
 
         <div class="records">
             <h2>Registros de Mascotas</h2>
