@@ -43,6 +43,10 @@
             margin-top: 20px;
         }
 
+        .modal-overlay {
+         display: none; /* Inicialmente oculto */
+        }
+
         .modal button:hover {
             background-color: #0056b3;
         }
@@ -82,13 +86,19 @@
     <div class="modal-overlay" id="welcomeModal">
         <div class="modal">
             <h2>¡Bienvenidos a Huellitas Urbanas!</h2>
-            <button onclick="closeModal()">Cerrar</button>
+           
         </div>
     </div>
-
+      
     <script>
         function showModal() {
-            document.getElementById('welcomeModal').style.display = 'flex';
+            const modal = document.getElementById('welcomeModal');
+            modal.style.display = 'flex';
+
+            // Cierra el modal automáticamente después de 3 segundos
+            setTimeout(function() {
+                closeModal();
+            }, 2000); // 3000 milisegundos = 3 segundos
         }
 
         function closeModal() {
