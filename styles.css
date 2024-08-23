@@ -10,7 +10,8 @@ body {
 
 .login-container {
     display: flex;
-    background-color: #73b7e4;
+    background-color: #033E8C
+    ;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
@@ -42,7 +43,7 @@ body {
 
 h2 {
     margin-bottom: 20px;
-    color: #333;
+    color: #fff;
 }
 
 form {
@@ -52,7 +53,7 @@ form {
 
 label {
     margin-bottom: 5px;
-    color: #555;
+    color: #fff;
 }
 
 input {
@@ -64,7 +65,7 @@ input {
 
 button {
     padding: 10px;
-    background-color: #3498db;
+    background-color: #04B2D9;
     color: white;
     border: none;
     border-radius: 4px;
@@ -78,3 +79,111 @@ button {
 button:hover {
     background-color: #2980b9;
 }
+
+.container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    background-color: #04B2D9;
+    color: #ffffff;
+    padding: 5px;
+    text-align: center;
+    font-size: 10px; 
+    margin-top: 5px;
+}
+
+.form-container {
+    padding: 20px;
+}
+
+.small-image {
+    display: block;
+    margin: 0 auto 20px;
+    width: 100px;
+    height: auto;
+
+    width: 50px; 
+    height: auto;
+}
+
+.form-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-container label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #000; /* Color para las etiquetas del formulario de mascotas */
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 90px;
+}
+
+.buttons button[type="submit"] {
+    background-color: #04B2D9;
+    color: #ffffff;
+}
+
+.buttons button.logout {
+    background-color: #04B2D9;
+    color: #ffffff;
+
+}
+
+.form-container {
+    padding: 20px;
+}
+
+.form-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-container label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #000; /* Color para las etiquetas del formulario de mascotas */
+}
+
+.form-container input {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 90px;
+}
+
+.buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: -0px;
+}
+
+.buttons button[type="submit"] {
+    background-color: #04B2D9;
+    color: #ffffff;
+}
+
+.buttons button.logout {
+    background-color: #04B2D9;
+    color: #ffffff;
+}
+
