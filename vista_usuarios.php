@@ -17,7 +17,8 @@ if ($conn->connect_error) {
 if (isset($_GET['action']) && $_GET['action'] == 'delete') {
     $id = $_GET['id'];
 
-    $sql = "DELETE FROM usuarios WHERE id=?";
+    // Preparar y ejecutar la consulta de eliminación
+    $sql = "DELETE FROM usuarios WHERE id = ?";
     $stmt = $conn->prepare($sql);
     if ($stmt) {
         $stmt->bind_param("i", $id);
@@ -36,6 +37,7 @@ if (isset($_GET['search'])) {
 
 // Obtener los registros para mostrar, con opción de búsqueda
 if ($search !== "") {
+    // Preparar la consulta con búsqueda por nombre
     $sql = "SELECT * FROM usuarios WHERE nombre LIKE ?";
     $stmt = $conn->prepare($sql);
     if ($stmt) {
@@ -47,11 +49,11 @@ if ($search !== "") {
         die("Error al preparar la consulta de búsqueda: " . $conn->error);
     }
 } else {
+    // Consulta sin filtros
     $sql = "SELECT * FROM usuarios";
     $result = $conn->query($sql);
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -89,7 +91,7 @@ if ($search !== "") {
             text-align: left;
         }
         .search-form {
-            margin-bottom: 20px;
+            margin-top: 20px;
         }
         .search-form input[type="text"] {
             padding: 6px;
@@ -107,7 +109,7 @@ if ($search !== "") {
         }
         .actions {
             display: flex;
-            justify-content: flex-start; /* Align actions to the start (left) */
+            justify-content: flex-start; /* Alínea acciones a la izquierda */
         }
         .actions a {
             margin-right: 10px;
@@ -121,7 +123,7 @@ if ($search !== "") {
             background-color: #0056b3;
         }
         .actions .delete-btn {
-            background-color: #dc3545; /* Red color for delete button */
+            background-color: #dc3545; /* Color rojo para el botón de eliminar */
         }
         .actions .delete-btn:hover {
             background-color: #c82333;
@@ -150,21 +152,21 @@ if ($search !== "") {
 
         .center-button {
             display: inline-block;
-            margin: 20px auto;
-            background-color: ##033E8C;
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #007bff;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin-left: 10px;
-            margin-right: 10px;
-            font-size: 13px; /* Reducir un poco el tamaño de la fuente */
             text-align: center;
-            white-space: nowrap; /* Asegura que el texto no se divida */
+            font-size: 14px;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .center-button:hover {
-            background-color: #45a049;
+            background-color: #0056b3;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
         }
 
         .close {
@@ -182,17 +184,12 @@ if ($search !== "") {
         }
 
         /* Estilo para los botones en la parte superior */
-        .button-group {
+        .top-buttons {
             text-align: left; /* Alineación de los botones */
-            margin-bottom: 10px; /* Espacio entre los botones y el formulario de búsqueda */
+            margin-bottom: 20px; /* Espacio entre los botones y el formulario de búsqueda */
         }
 
-        .button-group {
-            text-align: left; /* Alineación de los botones */
-            margin-bottom: 10px; /* Espacio entre los botones y el formulario de búsqueda */
-        }
-
-        .button-group a {
+        .top-buttons a {
             display: inline-block;
             padding: 10px 20px;
             margin-right: 10px; /* Espacio entre los botones */
@@ -201,8 +198,48 @@ if ($search !== "") {
             text-decoration: none;
             border-radius: 5px;
             font-size: 14px;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
+
+        .top-buttons a:hover {
+            background-color: #0056b3;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Estilo para el botón de Actualizar Cambios */
+#saveChanges {
+    display: inline-flex; /* Usa flexbox para centrar el contenido */
+    align-items: center; /* Centra verticalmente el texto dentro del botón */
+    justify-content: center; /* Centra horizontalmente el texto dentro del botón */
+    padding: 8px 16px; /* Espaciado interno ajustado */
+    background-color: #28a745; /* Verde para el botón */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center; /* Centra el texto dentro del botón */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 20px; /* Espacio en la parte superior */
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    width: 30%; /* Ajusta el ancho del botón al contenido */
+    max-width: 100%; /* Asegura que el botón no se desborde */
+    margin-left: 200px;
+    
+}
+
+
+#saveChanges:hover {
+    background-color: #218838; /* Verde más oscuro en hover */
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.2); /* Sombra en hover */
+}
+
+#saveChanges:focus {
+    outline: none; /* Elimina el contorno de enfoque */
+    box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.5); /* Contorno verde al enfocar */
+}
+
     </style>
 </head>
 <body>
@@ -211,10 +248,9 @@ if ($search !== "") {
             <h1>Vista de Usuarios</h1>
         </header>
 
-        <!-- Contenedor para los botones "Nuevo" y "Guardar" -->
-        <div class="button-group">
-            <a href="registro_mascotas.html">Nuevo</a>
-            <a href="main.html">rer</a>
+        <div class="top-buttons">
+            <a href="registro_usuarios.html" class="center-button">Nuevo</a>
+            <a href="main.html" class="center-button">Regresar</a>
         </div>
 
         <!-- Formulario de búsqueda -->
@@ -275,34 +311,35 @@ if ($search !== "") {
             <form id="editForm">
                 <input type="hidden" id="editId" name="id">
                 <label for="editNombre">Nombre:</label>
-                <input type="text" id="editNombre" name="nombre"><br><br>
+                <input type="text" id="editNombre" name="nombre" required>
+                <br>
                 <label for="editCorreo">Correo Electrónico:</label>
-                <input type="email" id="editCorreo" name="correo"><br><br>
+                <input type="email" id="editCorreo" name="correo" required>
+                <br>
                 <label for="editUsuario">Usuario:</label>
-                <input type="text" id="editUsuario" name="usuario"><br><br>
+                <input type="text" id="editUsuario" name="usuario" required>
+                <br>
                 <label for="editContraseña">Contraseña:</label>
-                <input type="password" id="editContraseña" name="contraseña"><br><br>
-                <button type="button" id="saveChangesBtn" class="center-button">Guardar Cambios</button>
+                <input type="password" id="editContraseña" name="contraseña" required>
+                <br>
+                <button type="button" id="saveChanges">Actualizar Cambios</button>
             </form>
         </div>
     </div>
 
     <script>
-        // Modal JS
+        // Obtener el modal
         var modal = document.getElementById("editModal");
         var span = document.getElementsByClassName("close")[0];
-        var editButtons = document.querySelectorAll(".edit-btn");
-        var saveChangesBtn = document.getElementById("saveChangesBtn");
 
-        editButtons.forEach(function(btn) {
-            btn.addEventListener("click", function(event) {
-                var id = event.target.getAttribute("data-id");
-                var nombre = decodeURIComponent(event.target.getAttribute("data-nombre"));
-                var correo = decodeURIComponent(event.target.getAttribute("data-correo"));
-                var usuario = decodeURIComponent(event.target.getAttribute("data-usuario"));
-                
-
-                var contraseña = decodeURIComponent(event.target.getAttribute("data-contraseña"));
+        // Abrir el modal al hacer clic en el botón de editar
+        document.querySelectorAll(".edit-btn").forEach(function(button) {
+            button.addEventListener("click", function() {
+                var id = this.getAttribute("data-id");
+                var nombre = this.getAttribute("data-nombre");
+                var correo = this.getAttribute("data-correo");
+                var usuario = this.getAttribute("data-usuario");
+                var contraseña = this.getAttribute("data-contraseña");
 
                 document.getElementById("editId").value = id;
                 document.getElementById("editNombre").value = nombre;
@@ -314,24 +351,41 @@ if ($search !== "") {
             });
         });
 
+        // Cerrar el modal al hacer clic en el botón (x)
         span.onclick = function() {
             modal.style.display = "none";
         }
 
+        // Cerrar el modal al hacer clic fuera del contenido del modal
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
         }
 
-        saveChangesBtn.addEventListener("click", function() {
-            alert("Los cambios han sido guardados.");
-            modal.style.display = "none";
-        });
+        // Guardar cambios y enviar al servidor
+        document.getElementById("saveChanges").onclick = function() {
+            var formData = new FormData(document.getElementById("editForm"));
+            fetch("update_usuario.php", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert("Cambios actualizados.");
+                modal.style.display = "none";
+                location.reload(); // Recargar la página para reflejar los cambios
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
     </script>
 </body>
 </html>
+
+
 <?php
-// Cerrar conexión
+// Cerrar la conexión
 $conn->close();
 ?>

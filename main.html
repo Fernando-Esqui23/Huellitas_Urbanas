@@ -44,11 +44,22 @@
         }
 
         .modal-overlay {
-         display: none; /* Inicialmente oculto */
+            display: none; /* Inicialmente oculto */
         }
 
         .modal button:hover {
             background-color: #0056b3;
+        }
+
+        .content {
+            text-align: center; /* Centra el contenido dentro del div */
+        }
+
+        .content img {
+            max-width: 50%; /* Ajusta el ancho máximo de la imagen */
+            height: auto;
+            margin: 20px auto; /* Centra la imagen horizontalmente */
+            display: block; /* Asegura que la imagen se comporte como un bloque para centrarla */
         }
     </style>
 </head>
@@ -56,7 +67,7 @@
     <div class="header">
         <div class="rectangle">
             <div class="logout-button">
-                <button id="logoutButton" name="button">Cerrar Sesión</button>
+                <button id="logoutButton" name="button" onclick="confirmLogout()">Cerrar Sesión</button>
             </div>
         </div>
         <div class="menu-icon" id="menuToggle">
@@ -64,48 +75,60 @@
         </div>
         <nav class="sidebar" id="menu">
             <ul>
-
                 <li><a href="registro_mascotas.html">Formulario de Mascotas</a></li>
-                <!-- Nuevo enlace para el formulario de mascotas -->
                 <li><a href="vista_mascotas.php">Vista de Mascotas</a></li>
-        
-                <!-- Nuevo enlace para el formulario de mascotas -->
                 <li><a href="registro_usuarios.html">Formulario de Usuarios</a></li>
                 <li><a href="vista_usuarios.php">Vista de Usuarios</a></li>
-                    </ul>
-                </li>
-                
-
-
-
+            </ul>
         </nav>
     </div>
     <div class="content">
         <h1>Bienvenido a la Pantalla Principal</h1>
+        <img src="images/Refugio PNG.png" alt="Descripción de la imagen">
     </div>
 
     <!-- Modal personalizado -->
     <div class="modal-overlay" id="welcomeModal">
         <div class="modal">
             <h2>¡Bienvenidos a Huellitas Urbanas!</h2>
-           
         </div>
     </div>
       
     <script>
         function showModal() {
-            const modal = document.getElementById('welcomeModal');
-            modal.style.display = 'flex';
-
-            // Cierra el modal automáticamente después de 3 segundos
-            setTimeout(function() {
-                closeModal();
-            }, 1000); // 
+            // Verificar si la alerta de bienvenida ya se mostró en esta sesión
+            if (!sessionStorage.getItem('welcomeShown')) {
+                const modal = document.getElementById('welcomeModal');
+                modal.style.display = 'flex';
+    
+                // Cierra el modal automáticamente después de 1 segundo
+                setTimeout(function() {
+                    closeModal();
+                }, 1000); 
+    
+                // Guardar en sessionStorage que la alerta ya se mostró
+                sessionStorage.setItem('welcomeShown', 'true');
+            }
         }
+                
+                    function closeModal() {
+                document.getElementById('welcomeModal').style.display = 'none';
+            }
 
-        function closeModal() {
-            document.getElementById('welcomeModal').style.display = 'none';
-        }
+            function confirmLogout() {
+                // Mostrar un mensaje de confirmación antes de cerrar sesión
+                if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+                    logout();
+                }
+            }
+
+            function logout() {
+                // Limpiar la clave 'welcomeShown' al cerrar sesión
+                sessionStorage.removeItem('welcomeShown');
+                window.location.href = 'login.html'; // Redirigir a la página de inicio de sesión
+            }
+
     </script>
+    
 </body>
 </html>

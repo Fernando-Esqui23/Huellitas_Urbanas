@@ -49,7 +49,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $result_check = $stmt_check->get_result();
  
         if ($result_check->num_rows > 0) {
-            echo "El registro ya existe.";
+            echo "<script>
+                    alert('La mascota ya esta registrada.');
+                    window.location.href = 'registro_mascotas.html';
+                  </script>";
             $stmt_check->close();
             $conn->close();
             exit();

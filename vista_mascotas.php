@@ -1,9 +1,9 @@
 <?php
 // Datos de conexión a la base de datos
 $servername = "localhost";
-$username = "root"; // Reemplaza con tu usuario de MySQL
-$password = ""; // Reemplaza con tu contraseña de MySQL
-$database = "usuarios"; // La base de datos que ya tienes configurada
+$username = "root";
+$password = "";
+$database = "usuarios";
 
 // Crear conexión
 $conn = new mysqli($servername, $username, $password, $database);
@@ -54,6 +54,7 @@ if ($search !== "") {
     $result = $conn->query($sql);
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -152,21 +153,21 @@ if ($search !== "") {
 
         .center-button {
             display: inline-block;
-            margin: 20px auto;
-            background-color: #033E8C;
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #007bff;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin-left: 10px;
-            margin-right: 10px;
-            font-size: 13px; /* Reducir un poco el tamaño de la fuente */
             text-align: center;
-            white-space: nowrap; /* Asegura que el texto no se divida */
+            font-size: 14px;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .center-button:hover {
-            background-color: #45a049;
+            background-color: #0056b3;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
         }
 
         .close {
@@ -185,26 +186,62 @@ if ($search !== "") {
 
         /* Estilo para los botones en la parte superior */
         .top-buttons {
-            margin-bottom: 20px; /* Ajusta el margen inferior si es necesario */
-            padding: 10px;
-            text-align: center; /* Alinea los botones al centro */
+            text-align: left; /* Alineación de los botones */
+            margin-bottom: 20px; /* Espacio entre los botones y el formulario de búsqueda */
         }
 
         .top-buttons a {
             display: inline-block;
             padding: 10px 20px;
-            margin-left: 10px; /* Espacio entre botones */
+            margin-right: 10px; /* Espacio entre los botones */
             background-color: #007bff;
             color: white;
             text-decoration: none;
             border-radius: 5px;
             font-size: 14px;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .top-buttons a:hover {
             background-color: #0056b3;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
         }
+
+        
+        /* Estilo para el botón de Actualizar Cambios */
+#saveChanges {
+    display: inline-flex; /* Usa flexbox para centrar el contenido */
+    align-items: center; /* Centra verticalmente el texto dentro del botón */
+    justify-content: center; /* Centra horizontalmente el texto dentro del botón */
+    padding: 8px 16px; /* Espaciado interno ajustado */
+    background-color: #28a745; /* Verde para el botón */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center; /* Centra el texto dentro del botón */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 20px; /* Espacio en la parte superior */
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    width: 30%; /* Ajusta el ancho del botón al contenido */
+    max-width: 100%; /* Asegura que el botón no se desborde */
+    margin-left: 200px;
+    
+}
+
+
+#saveChanges:hover {
+    background-color: #218838; /* Verde más oscuro en hover */
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.2); /* Sombra en hover */
+}
+
+#saveChanges:focus {
+    outline: none; /* Elimina el contorno de enfoque */
+    box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.5); /* Contorno verde al enfocar */
+}
+
     </style>
 </head>
 <body>
@@ -258,8 +295,8 @@ if ($search !== "") {
                                 <td><?php echo $row['discapacidad']; ?></td>
                                 <td><?php echo $row['detalles_discapacidad']; ?></td>
                                 <td class="actions">
-                                    <a href="editar_mascota.php?id=<?php echo $row['id']; ?>" class="edit-btn">Editar</a>
-                                    <a href="vista_mascotas.php?action=delete&id=<?php echo $row['id']; ?>" class="delete-btn">Eliminar</a>
+                                    <a href="#" class="edit-btn" onclick="openModal(<?php echo $row['id']; ?>, '<?php echo $row['tipo_mascota']; ?>', '<?php echo $row['nombre']; ?>', '<?php echo $row['fecha_rescate']; ?>', '<?php echo $row['edad']; ?>', '<?php echo $row['discapacidad']; ?>', '<?php echo $row['detalles_discapacidad']; ?>')">Editar</a>
+                                    <a href="vista_mascotas.php?action=delete&id=<?php echo urlencode($row['id']); ?>" class="delete-btn" onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?');">Eliminar</a>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -272,56 +309,66 @@ if ($search !== "") {
             </table>
         </div>
 
-        <!-- Modal para Editar Mascota -->
+        <!-- Modal para editar una mascota -->
         <div id="editModal" class="modal">
             <div class="modal-content">
-                <span class="close">&times;</span>
+                <span class="close" onclick="closeModal()">&times;</span>
                 <h2>Editar Mascota</h2>
-                <form id="editForm" method="POST" action="update_mascota.php">
-                    <!-- Aquí debes incluir los campos del formulario que quieres editar -->
-                    <input type="hidden" id="editId" name="id">
-                    <label for="editNombre">Nombre:</label>
-                    <input type="text" id="editNombre" name="nombre" required>
-                    <!-- Agrega más campos según sea necesario -->
-                    <button type="submit" class="center-button">Guardar Cambios</button>
+                <form id="editForm">
+                    <input type="hidden" name="id" id="editId">
+                    <label for="tipo_mascota">Tipo de Mascota:</label>
+                    <input type="text" name="tipo_mascota" id="editTipoMascota" required><br>
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" name="nombre" id="editNombre" required><br>
+                    <label for="fecha_rescate">Fecha de Rescate:</label>
+                    <input type="date" name="fecha_rescate" id="editFechaRescate" required><br>
+                    <label for="edad">Edad:</label>
+                    <input type="number" name="edad" id="editEdad" required><br>
+                    <label for="discapacidad">Discapacidad:</label>
+                    <input type="text" name="discapacidad" id="editDiscapacidad"><br>
+                    <label for="detalles_discapacidad">Detalles de Discapacidad:</label>
+                    <textarea name="detalles_discapacidad" id="editDetallesDiscapacidad"></textarea><br>
+                    <input type="button" id="saveChanges" value="Actualizar  Cambios">
                 </form>
             </div>
         </div>
     </div>
 
     <script>
-        // Mostrar el modal cuando se haga clic en el botón de editar
-        document.querySelectorAll('.edit-btn').forEach(button => {
-            button.addEventListener('click', function(event) {
-                event.preventDefault();
-                const id = this.href.split('id=')[1];
-                fetch(`get_mascota.php?id=${id}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        document.getElementById('editId').value = data.id;
-                        document.getElementById('editNombre').value = data.nombre;
-                        // Rellena los demás campos según sea necesario
-                        document.getElementById('editModal').style.display = 'block';
-                    });
+        function openModal(id, tipo_mascota, nombre, fecha_rescate, edad, discapacidad, detalles_discapacidad) {
+            document.getElementById("editId").value = id;
+            document.getElementById("editTipoMascota").value = tipo_mascota;
+            document.getElementById("editNombre").value = nombre;
+            document.getElementById("editFechaRescate").value = fecha_rescate;
+            document.getElementById("editEdad").value = edad;
+            document.getElementById("editDiscapacidad").value = discapacidad;
+            document.getElementById("editDetallesDiscapacidad").value = detalles_discapacidad;
+
+            var modal = document.getElementById("editModal");
+            modal.style.display = "block";
+        }
+
+        function closeModal() {
+            var modal = document.getElementById("editModal");
+            modal.style.display = "none";
+        }
+
+        document.getElementById("saveChanges").onclick = function() {
+            var formData = new FormData(document.getElementById("editForm"));
+            fetch("update_mascota.php", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert("Cambios actualizados.");
+                closeModal();
+                location.reload(); // Recargar la página para reflejar los cambios
+            })
+            .catch(error => {
+                console.error('Error:', error);
             });
-        });
-
-        // Cerrar el modal cuando se haga clic en la cruz
-        document.querySelector('.close').addEventListener('click', function() {
-            document.getElementById('editModal').style.display = 'none';
-        });
-
-        // Cerrar el modal si se hace clic fuera del contenido del modal
-        window.addEventListener('click', function(event) {
-            if (event.target === document.getElementById('editModal')) {
-                document.getElementById('editModal').style.display = 'none';
-            }
-        });
-
-        // Mostrar alerta al guardar cambios
-        document.getElementById('editForm').addEventListener('submit', function(event) {
-            alert('Cambios guardados correctamente.');
-        });
+        }
     </script>
 </body>
 </html>
