@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -31,8 +30,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: main.html");
         exit();
     } else {
-        // Si las credenciales son incorrectas
-        echo "Usuario o contraseña incorrectos";
+        // Si las credenciales son incorrectas, muestra una alerta con JavaScript
+        echo '<script type="text/javascript">',
+             'alert("Usuario o contraseña incorrectos");',
+             'window.location.href = "index.html";', // Redirige a la página de inicio o formulario
+             '</script>';
     }
 } else {
     // Si no es una solicitud POST
