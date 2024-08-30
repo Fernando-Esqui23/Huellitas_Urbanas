@@ -77,23 +77,20 @@ body {
     text-align: center;
 }
 
+
 .logout-button {
-    display: flex;
-    justify-content: flex-end; 
-    margin: 10px; 
-}
-
-button#logoutButton {
-    padding: 8px 16px; 
-    background-color: #3498db; 
-    color: white; 
-    border: none;
-    border-radius: 4px; 
+    background: none; /* Sin color de fondo */
+    border: none; /* Sin contorno */
+    color: white; /* Color del texto blanco */
+    font-size: 16px; 
     cursor: pointer; 
-    font-size: 16px
+    padding: 0; /* Elimina el relleno del botón */
+    margin: 10px 0 0 0; 
+    position: relative; /* Permite el ajuste de posición */
+    left: 450px; 
 }
 
-button#logoutButton:hover {
-    background-color: #2980b9; 
+.logout-button:focus {
+    outline: none; /* Elimina el contorno de enfoque */
 }
 

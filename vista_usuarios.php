@@ -249,6 +249,39 @@ if ($search !== "") {
     box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.5); /* Contorno verde al enfocar */
 }
 
+/* Estilos para el modal */
+.modal-content {
+    padding: 20px;
+    background-color: #fefefe;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    margin: auto;
+}
+
+/* Estilos para los títulos de los campos */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group h3 {
+    margin: 0;
+    font-size: 0.8em;;
+    color: #333;
+}
+
+.form-group label {
+    display: block;
+    margin: 5px 0;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+
     </style>
 </head>
 <body>
@@ -313,28 +346,38 @@ if ($search !== "") {
     </div>
 
     <!-- Modal de Edición -->
-    <div id="editModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Editar Usuario</h2>
-            <form id="editForm">
-                <input type="hidden" id="editId" name="id">
+    <!-- Modal de Edición -->
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Editar Usuario</h2>
+        <form id="editForm">
+            <input type="hidden" id="editId" name="id">
+            <div class="form-group">
+                <h3>Nombre:</h3>
                 <label for="editNombre">Nombre:</label>
                 <input type="text" id="editNombre" name="nombre" required>
-                <br>
+            </div>
+            <div class="form-group">
+                <h3>Correo Electrónico:</h3>
                 <label for="editCorreo">Correo Electrónico:</label>
                 <input type="email" id="editCorreo" name="correo" required>
-                <br>
+            </div>
+            <div class="form-group">
+                <h3>Usuario:</h3>
                 <label for="editUsuario">Usuario:</label>
                 <input type="text" id="editUsuario" name="usuario" required>
-                <br>
+            </div>
+            <div class="form-group">
+                <h3>Contraseña:</h3>
                 <label for="editContraseña">Contraseña:</label>
                 <input type="password" id="editContraseña" name="contraseña" required>
-                <br>
-                <button type="button" id="saveChanges">Actualizar Cambios</button>
-            </form>
-        </div>
+            </div>
+            <button type="button" id="saveChanges">Actualizar Cambios</button>
+        </form>
     </div>
+</div>
+
 
     <script>
         // Obtener el modal

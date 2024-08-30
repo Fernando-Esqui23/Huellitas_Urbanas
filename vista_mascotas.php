@@ -252,6 +252,39 @@ if ($search !== "") {
     box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.5); /* Contorno verde al enfocar */
 }
 
+/* Estilos para el modal */
+.modal-content {
+    padding: 20px;
+    background-color: #fefefe;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    margin: auto;
+}
+
+/* Estilos para los títulos de los campos */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group h3 {
+    margin: 0;
+    font-size: 0.8em;;
+    color: #333;
+}
+
+.form-group label {
+    display: block;
+    margin: 5px 0;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+
     </style>
 </head>
 <body>
@@ -319,30 +352,55 @@ if ($search !== "") {
             </table>
         </div>
 
-        <!-- Modal para editar una mascota -->
-        <div id="editModal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeModal()">&times;</span>
-                <h2>Editar Mascota</h2>
-                <form id="editForm">
-                    <input type="hidden" name="id" id="editId">
-                    <label for="tipo_mascota">Tipo de Mascota:</label>
-                    <input type="text" name="tipo_mascota" id="editTipoMascota" required><br>
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" name="nombre" id="editNombre" required><br>
-                    <label for="fecha_rescate">Fecha de Rescate:</label>
-                    <input type="date" name="fecha_rescate" id="editFechaRescate" required><br>
-                    <label for="edad">Edad:</label>
-                    <input type="number" name="edad" id="editEdad" required><br>
-                    <label for="discapacidad">Discapacidad:</label>
-                    <input type="text" name="discapacidad" id="editDiscapacidad"><br>
-                    <label for="detalles_discapacidad">Detalles de Discapacidad:</label>
-                    <textarea name="detalles_discapacidad" id="editDetallesDiscapacidad"></textarea><br>
-                    <input type="button" id="saveChanges" value="Actualizar  Cambios">
-                </form>
+      <!-- Modal para editar una mascota -->
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Editar Mascota</h2>
+        <form id="editForm">
+            <input type="hidden" name="id" id="editId">
+
+            <div class="form-group">
+                <h3>Tipo de Mascota:</h3>
+                <label for="editTipoMascota">Tipo de Mascota:</label>
+                <input type="text" name="tipo_mascota" id="editTipoMascota" required>
             </div>
-        </div>
+
+            <div class="form-group">
+                <h3>Nombre:</h3>
+                <label for="editNombre">Nombre:</label>
+                <input type="text" name="nombre" id="editNombre" required>
+            </div>
+
+            <div class="form-group">
+                <h3>Fecha de Rescate:</h3>
+                <label for="editFechaRescate">Fecha de Rescate:</label>
+                <input type="date" name="fecha_rescate" id="editFechaRescate" required>
+            </div>
+
+            <div class="form-group">
+                <h3>Edad:</h3>
+                <label for="editEdad">Edad:</label>
+                <input type="number" name="edad" id="editEdad" required>
+            </div>
+
+            <div class="form-group">
+                <h3>Discapacidad:</h3>
+                <label for="editDiscapacidad">Discapacidad:</label>
+                <input type="text" name="discapacidad" id="editDiscapacidad">
+            </div>
+
+            <div class="form-group">
+                <h3>Detalles de Discapacidad:</h3>
+                <label for="editDetallesDiscapacidad">Detalles de Discapacidad:</label>
+                <textarea name="detalles_discapacidad" id="editDetallesDiscapacidad"></textarea>
+            </div>
+
+            <input type="button" id="saveChanges" value="Actualizar Cambios">
+        </form>
     </div>
+</div>
+
 
     <script>
         function openModal(id, tipo_mascota, nombre, fecha_rescate, edad, discapacidad, detalles_discapacidad) {

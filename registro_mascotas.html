@@ -27,9 +27,15 @@
                 <input type="number" id="edad" name="edad" required>
 
                 <label for="discapacidad">Discapacidad:</label>
-                <input type="text" id="discapacidad" name="discapacidad">
+                <div>
+                    <input type="radio" id="discapacidad-si" name="discapacidad" value="Sí" onclick="toggleDetalles(true)">
+                    <label for="discapacidad-si">Sí</label>
+                    
+                    <input type="radio" id="discapacidad-no" name="discapacidad" value="No" onclick="toggleDetalles(false)">
+                    <label for="discapacidad-no">No</label>
+                </div>
 
-                <label for="detalles-discapacidad">Detalles de Discapacidad:</label>
+                <label for="detalles-discapacidad" id="detalles-discapacidad-label">Detalles de Discapacidad:</label>
                 <input type="text" id="detalles-discapacidad" name="detalles-discapacidad">
                 
                 <div class="buttons">
@@ -38,11 +44,28 @@
                 </div>
                 
                 <script>
+                    function toggleDetalles(show) {
+                        var detallesLabel = document.getElementById('detalles-discapacidad-label');
+                        var detallesInput = document.getElementById('detalles-discapacidad');
+                        
+                        if (show) {
+                            detallesLabel.style.display = 'block';
+                            detallesInput.style.display = 'block';
+                        } else {
+                            detallesLabel.style.display = 'none';
+                            detallesInput.style.display = 'none';
+                        }
+                    }
+
+                    // Ocultar "Detalles de Discapacidad" al cargar la página
+                    window.onload = function() {
+                        toggleDetalles(false);
+                    };
+
                     function redirigirmenu() {
                         window.location.href = 'main.html';
                     }
-                    
-                </script>
+                    </script>
                 
                 
             </form>

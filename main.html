@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="main-styles.css">
     <script defer src="menu.js"></script>
     <style>
+
+    
+
         /* Estilo para el fondo oscuro del modal */
         .modal-overlay {
             position: fixed;
@@ -61,13 +64,15 @@
             margin: 20px auto; /* Centra la imagen horizontalmente */
             display: block; /* Asegura que la imagen se comporte como un bloque para centrarla */
         }
+
+   
     </style>
 </head>
 <body onload="showModal()">
     <div class="header">
         <div class="rectangle">
             <div class="logout-button">
-                <button id="logoutButton" name="button" onclick="confirmLogout()">Cerrar Sesión</button>
+                <button class="logout-button" onclick="confirmLogout()">Cerrar Sesión</button>
             </div>
         </div>
         <div class="menu-icon" id="menuToggle">
@@ -115,20 +120,22 @@
                 document.getElementById('welcomeModal').style.display = 'none';
             }
 
-            function confirmLogout() {
-                // Mostrar un mensaje de confirmación antes de cerrar sesión
-                if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
-                    logout();
-                }
-            }
-
-            function logout() {
-                // Limpiar la clave 'welcomeShown' al cerrar sesión
-                sessionStorage.removeItem('welcomeShown');
-                window.location.href = 'login.html'; // Redirigir a la página de inicio de sesión
-            }
+           
 
     </script>
+
+<script>
+    function confirmLogout() {
+        if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+            logout();
+        }
+    }
+
+    function logout() {
+        sessionStorage.removeItem('welcomeShown');
+        window.location.href = 'index.html'; // Redirigir a la página de inicio de sesión
+    }
+</script>
     
 </body>
 </html>
