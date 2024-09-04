@@ -87,7 +87,7 @@ body {
     padding: 0; /* Elimina el relleno del botón */
     margin: 10px 0 0 0; 
     position: relative; /* Permite el ajuste de posición */
-    left: 450px; 
+    left: 680px; 
 }
 
 .logout-button:focus {
