@@ -65,7 +65,9 @@
             display: block; /* Asegura que la imagen se comporte como un bloque para centrarla */
         }
 
-   
+        .admin-text {
+            margin-left: 200px; /* Mueve el texto hacia la derecha */
+        }
     </style>
 </head>
 <body onload="showModal()">
@@ -73,7 +75,7 @@
         <div class="rectangle">
             <div class="logout-button">
                 <button class="logout-button" onclick="confirmLogout()">Cerrar Sesión</button>
-                <span class="admin-text">Administrador</span>
+                <span class="admin-text">Administrador :</span>
             </div>
         </div>
         <div class="menu-icon" id="menuToggle">
@@ -86,9 +88,7 @@
                 <li><a href="registro_usuarios.html">Formulario de Usuarios</a></li>
                 <li><a href="vista_usuarios.php">Vista de Usuarios</a></li>
                 <li><a href="registro_adoptantes.html">Formulario de Adoptantes</a></li>
-                <li><a href="vista_adoptantes.php">Vista de adoptantes</a></li>
-                <li><a href="registro _donaciones.html">Formulario de Donaciones</a></li>
-                <li><a href="vista_donaciones.php">Vista de donaciones</a></li>
+                <li><a href="vista_adoptantes.php">Vista de adoptantes</a></li> 
             </ul>
         </nav>
     </div>
@@ -100,7 +100,7 @@
     <!-- Modal personalizado -->
     <div class="modal-overlay" id="welcomeModal">
         <div class="modal">
-            <h2>¡Bienvenidos a Huellitas Urbanas!</h2>
+            <h2>¡Bienvenidos a Huellitas Urbanas, Has Ingresado Como Administrador!</h2>
         </div>
     </div>
       
@@ -114,7 +114,7 @@
                 // Cierra el modal automáticamente después de 1 segundo
                 setTimeout(function() {
                     closeModal();
-                }, 1000); 
+                }, 1700); 
     
                 // Guardar en sessionStorage que la alerta ya se mostró
                 sessionStorage.setItem('welcomeShown', 'true');
