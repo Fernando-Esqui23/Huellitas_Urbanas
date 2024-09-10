@@ -15,8 +15,11 @@
             <img src="images/iconomascota.png" alt="Imagen Pequeña" class="small-image">
             <form action="formulario_mascotas.php" method="post">
                 <label for="tipo-mascota">Tipo de Mascota:</label>
-                <input type="text" id="tipo-mascota" name="tipo-mascota" required>
-                
+                <select id="tipo-mascota" name="tipo-mascota" required>
+                    <option value="">Selecciona una opción</option>
+                    <option value="perro">Perro</option>
+                    <option value="gato">Gato</option>
+                </select>
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" required>
                 
@@ -39,7 +42,7 @@
                 <input type="text" id="detalles-discapacidad" name="detalles-discapacidad">
                 
                 <div class="buttons">
-                    <button type="submit">Guardar</button>
+                    <button type="submit">Registrar</button>
                     <button type="button" class="logout" onclick="redirigirmenu()">Cancelar</button>
                 </div>
                 
