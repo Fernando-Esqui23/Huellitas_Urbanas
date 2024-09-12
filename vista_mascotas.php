@@ -293,11 +293,7 @@ if ($search !== "") {
             <h1>Vista de Mascotas</h1>
         </header>
 
-        <!-- Contenedor para los botones en la parte superior -->
-        <div class="top-buttons">
-            <a href="registro_mascotas.html" class="center-button">Nuevo</a>
-            <a href="main.html" class="center-button">Regresar</a>
-        </div>
+        
 
         <!-- Formulario de búsqueda -->
         <div class="search-form">
@@ -351,7 +347,11 @@ if ($search !== "") {
                 </tbody>
             </table>
         </div>
-
+<!-- Contenedor para los botones en la parte superior -->
+<div class="top-buttons">
+            <a href="registro_mascotas.html" class="center-button">Nuevo</a>
+            <a href="main.html" class="center-button">Regresar</a>
+        </div>
       <!-- Modal para editar una mascota -->
 <div id="editModal" class="modal">
     <div class="modal-content">
