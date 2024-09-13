@@ -292,11 +292,7 @@ if ($search !== "") {
         <header class="header">
             <h1>Vista de Adoptantes</h1>
         </header>
-  <!-- Contenedor para los botones en la parte superior -->
-        <div class="top-buttons">
-            <a href="registro_adoptantes.html" class="center-button">Nuevo</a>
-            <a href="main.html" class="center-button">Regresar</a>
-        </div>
+  
 
         <form action="generar_pdf.php" method="get" class="search-form">
             <label for="id">Ingrese el ID:</label>
@@ -360,6 +356,11 @@ if ($search !== "") {
                     <?php endif; ?>
                 </tbody>
             </table>
+        </div>
+        <!-- Contenedor para los botones en la parte superior -->
+        <div class="top-buttons">
+            <a href="registro_adoptantes.html" class="center-button">Nuevo</a>
+            <a href="main.html" class="center-button">Regresar</a>
         </div>
 
         <!-- Modal para editar un adoptante -->
