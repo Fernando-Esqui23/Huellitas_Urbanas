@@ -198,6 +198,13 @@ select {
     border-radius: 5px;
   }
 
+  
+.obligatorio {
+    font-size: 8px;
+    color: red;
+    margin-left: 5px;
+}
+
 
 
 

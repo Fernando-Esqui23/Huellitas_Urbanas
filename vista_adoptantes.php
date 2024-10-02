@@ -130,15 +130,7 @@ if ($search !== "") {
             background-color: #04B2D9;
             border-radius: 4px;
         }
-        .actions a:hover {
-            background-color: #0056b3;
-        }
-        .actions .delete-btn {
-            background-color: #dc3545; /* Color rojo para el botón de eliminar */
-        }
-        .actions .delete-btn:hover {
-            background-color: #c82333;
-        }
+       
 
         /* Estilos para el modal */
         .modal {
@@ -293,14 +285,6 @@ if ($search !== "") {
             <h1>Vista de Adoptantes</h1>
         </header>
   
-
-        <form action="generar_pdf.php" method="get" class="search-form">
-            <label for="id">Ingrese el ID:</label>
-            <input type="text" id="id" name="id" required>
-            <input type="submit" value="Generar PDF">
-        </form>
-
-
         <!-- Formulario de búsqueda -->
         <div class="search-form">
             <form method="GET" action="vista_adoptantes.php">
@@ -331,6 +315,35 @@ if ($search !== "") {
                     </tr>
                 </thead>
                 <tbody>
+                    <?php
+                        if ($result && $result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<tr>";
+                                echo "<td>{$row['id']}</td>";
+                                echo "<td>{$row['nombre']}</td>";
+                                echo "<td>{$row['genero']}</td>";
+                                echo "<td>{$row['edad']}</td>";
+                                echo "<td>{$row['dui']}</td>";
+                                echo "<td>{$row['telefono']}</td>";
+                                echo "<td>{$row['correo']}</td>";
+                                echo "<td>{$row['direccion']}</td>";
+                                echo "<td>{$row['ocupacion']}</td>";
+                                echo "<td class='actions'>";
+                                echo "<a href='generar_pdf.php?id={$row['id']}'>Generar PDF</a>";
+                                echo "<a href='#' class='edit-btn' onclick=\"openModal({$row['id']}, '{$row['nombre']}', '{$row['genero']}', '{$row['edad']}', '{$row['dui']}', '{$row['telefono']}', '{$row['correo']}', '{$row['direccion']}', '{$row['ocupacion']}');\">
+                                    <img src='images/iconoeditar.png' alt='Editar' style='width: 20px; height: 20px;'>
+                                </a>";
+                                echo "<a href='vista_adoptantes.php?action=delete&id=" . urlencode($row['id']) . "' class='delete-btn' onclick=\"return confirm('¿Estás seguro de que deseas eliminar este registro?');\">
+                                    <img src='images/iconoeliminar.png' alt='Eliminar' style='width: 20px; height: 20px;'>
+                                </a>";
+
+                                echo "</td>";
+                                echo "</tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='3'>No se encontraron registros</td></tr>";
+                        }
+                    ?>
                     <?php if ($result->num_rows > 0): ?>
                         <?php while($row = $result->fetch_assoc()): ?>
                             <tr>
