@@ -15,23 +15,23 @@
             <img src="images/iconomascota.png" alt="Imagen Pequeña" class="small-image">
             <form id="formulario" action="formulario_mascotas.php" method="post">
                 
-                <label for="tipo-mascota">Tipo de Mascota: <span class="obligatorio">* campo obligatorio *</span></label>
+                <label for="tipo-mascota">Tipo de Mascota: <span class="obligatorio">*</span></label>
                 <select name="tipo-mascota" id="tipo-mascota" required>
                     <option value="">Selecciona el tipo de mascota</option>
                     <option value="perro">Perro</option>
                     <option value="gato">Gato</option>
                 </select>
 
-                <label for="nombre">Nombre: <span class="obligatorio">* campo obligatorio *</span></label>
+                <label for="nombre">Nombre: <span class="obligatorio">*</span></label>
                 <input type="text" id="nombre" name="nombre" placeholder="Ingrese el nombre de la mascota" required>
                 
-                <label for="fecha-rescate">Fecha de Rescate: <span class="obligatorio">* campo obligatorio *</span></label>
+                <label for="fecha-rescate">Fecha de Rescate: <span class="obligatorio">*</span></label>
                 <input type="date" id="fecha-rescate" name="fecha-rescate" required>
                 
-                <label for="edad">Edad Aproximada (En Meses): <span class="obligatorio">* campo obligatorio *</span></label>
+                <label for="edad">Edad Aproximada (En Meses): <span class="obligatorio">*</span></label>
                 <input type="number" id="edad" name="edad" placeholder="Ingrese la edad en meses" required>
 
-                <label for="discapacidad">Discapacidad: <span class="obligatorio">* campo obligatorio *</span></label>
+                <label for="discapacidad">Discapacidad: <span class="obligatorio">*</span></label>
                 <div>
                     <input type="radio" id="discapacidad-si" name="discapacidad" value="Sí" onclick="toggleDetalles(true)">
                     <label for="discapacidad-si">Sí</label>
