@@ -77,7 +77,7 @@ if ($search !== "") {
             margin-bottom: 20px;
         }
         .records {
-            margin-top: 20px;
+            margin-top: -20px;
         }
         table {
             width: 100%;
@@ -308,7 +308,7 @@ if ($search !== "") {
         </div>
 
         <div class="records">
-            <h2>Registros de Mascotas</h2>
+           <!-- <h2>Registros de Mascotas</h2>-->
             <table>
                 <thead>
                     <tr>
@@ -340,7 +340,7 @@ if ($search !== "") {
                                 -->
                                 <a href="#" class="edit-btn" onclick="openModal(<?php echo $row['id']; ?>, '<?php echo $row['tipo_mascota']; ?>', '<?php echo $row['nombre']; ?>', '<?php echo $row['fecha_rescate']; ?>', '<?php echo $row['edad']; ?>', '<?php echo $row['discapacidad']; ?>', '<?php echo $row['detalles_discapacidad']; ?>')">Editar</a>
                                 <a href="vista_mascotas.php?action=delete&id=<?php echo urlencode($row['id']); ?>" class="delete-btn" onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?');">Eliminar</a>
-                                
+
                                 </td>
                             </tr>
                         <?php endwhile; ?>
