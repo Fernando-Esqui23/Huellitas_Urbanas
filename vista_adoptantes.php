@@ -77,7 +77,7 @@ if ($search !== "") {
             margin-bottom: 20px;
         }
         .records {
-            margin-top: 20px;
+            margin-top: -20px;
         }
         table {
             width: 100%;
@@ -298,7 +298,7 @@ if ($search !== "") {
         </div>
 
         <div class="records">
-            <h2>Registros de Adoptantes</h2>
+            <!--<h2>Registros de Adoptantes</h2>-->
             <table>
                 <thead>
                     <tr>
