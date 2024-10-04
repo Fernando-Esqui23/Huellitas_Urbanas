@@ -330,15 +330,19 @@ if ($search !== "") {
                                 echo "<td>{$row['ocupacion']}</td>";
                                 echo "<td class='actions'>";
                                 echo "<a href='generar_pdf.php?id={$row['id']}'>Generar PDF</a>";
-                                echo "<a href='#' class='edit-btn' onclick=\"openModal({$row['id']}, '{$row['nombre']}', '{$row['genero']}', '{$row['edad']}', '{$row['dui']}', '{$row['telefono']}', '{$row['correo']}', '{$row['direccion']}', '{$row['ocupacion']}');\">
-                                    <img src='images/iconoeditar.png' alt='Editar' style='width: 20px; height: 20px;'>
-                                </a>";
-                                echo "<a href='vista_adoptantes.php?action=delete&id=" . urlencode($row['id']) . "' class='delete-btn' onclick=\"return confirm('¿Estás seguro de que deseas eliminar este registro?');\">
-                                    <img src='images/iconoeliminar.png' alt='Eliminar' style='width: 20px; height: 20px;'>
-                                </a>";
 
+                                echo "<a href='#' class='edit-btn' onclick=\"openModal({$row['id']}, '{$row['nombre']}', '{$row['genero']}', '{$row['edad']}', '{$row['dui']}', '{$row['telefono']}', '{$row['correo']}', '{$row['direccion']}', '{$row['ocupacion']}');\">
+                                Editar
+                                </a>";
+                                
+                                echo "<a href='vista_adoptantes.php?action=delete&id=" . urlencode($row['id']) . "' class='delete-btn' onclick=\"return confirm('¿Estás seguro de que deseas eliminar este registro?');\" style='color: white; background-color: #dc3545; padding: 5px 10px; border-radius: 5px; text-decoration: none;'>
+                                Eliminar
+                                </a>";
+                            
+                            
                                 echo "</td>";
                                 echo "</tr>";
+                                
                             }
                         } else {
                             echo "<tr><td colspan='3'>No se encontraron registros</td></tr>";

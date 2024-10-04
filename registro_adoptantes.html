@@ -13,7 +13,7 @@
         </header>
         <div class="form-container">
             <img src="images/iconoadoptante.png" alt="Imagen Pequeña" class="small-image">
-            <form action="formulario_adoptantes.php" method="post">
+            <form id="formulario" action="formulario_adoptantes.php" method="post">
                 <label for="nombre">Nombre:  <span class="obligatorio">* campo obligatorio *</span></label>
                 <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre completo" required>
         
@@ -44,13 +44,29 @@
                 <input type="text" id="ocupacion" name="ocupacion" placeholder="Ingrese su ocupación" required>
 
                 <div class="buttons">
+                    <!-- Botón Regresar que lleva al usuario a la página anterior -->
+                    <button type="button" class="regresar" onclick="redirigirAlMenu()">Regresar</button>
                     <button type="submit">Guardar</button>
-                    <button type="button" class="logout" onclick="redirigirmenu()">Cancelar</button>
+                    <!-- Botón Cancelar que limpia el formulario -->
+                    <button type="button" class="logout" onclick="limpiarFormulario()">Cancelar</button>
+                    
                 </div>
+                <script>
+                    function redirigirAlMenu() {
+                        window.location.href = 'main.html'; 
+                    }
+                </script>
                 
                 <script>
-                    function redirigirmenu() {
-                        window.location.href = 'main.html';
+                    // Función para limpiar el formulario
+                    function limpiarFormulario() {
+                        // Obtén el formulario por su id
+                        const formulario = document.getElementById('formulario');
+                        
+                        // Resetea el formulario, limpiando todos los campos
+                        formulario.reset();
+
+                        
                     }
                 </script>
                 
