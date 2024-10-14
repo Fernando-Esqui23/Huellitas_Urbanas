@@ -67,16 +67,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
  
     // Ejecutar la consulta y verificar el resultado
     if ($stmt->execute()) {
-        // Redirigir a la vista de mascotas después de guardar
-        header("Location: vista_mascotas.php");
+        // Si el registro se inserta correctamente, mostrar la alerta de éxito en el frontend
+        echo "<script>
+                window.location.href = 'registro_mascotas.html?success=true';
+              </script>";
         exit();
     } else {
-        echo "Error: " . $stmt->error;
+        echo "Error al insertar el registro: " . $stmt->error;
     }
- 
-    // Cerrar la consulta
+
+    // Cerrar la declaración
     $stmt->close();
     $conn->close();
-   
+}
+?>
 }
 

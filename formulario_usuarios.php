@@ -63,16 +63,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_param("ssss", $nombre, $correo, $usuario, $contraseña);
     }
 
-    // Ejecutar la consulta y verificar el resultado
-    if ($stmt->execute()) {
-        // Redirigir a la vista de usuarios
-        header("Location: vista_usuarios.php");
+     // Ejecutar la consulta y verificar el resultado
+     if ($stmt->execute()) {
+        // Si el registro se inserta correctamente, mostrar la alerta de éxito en el frontend
+        echo "<script>
+                window.location.href = 'registro_usuarios.html?success=true';
+              </script>";
         exit();
     } else {
         echo "Error al insertar el registro: " . $stmt->error;
     }
 
-    // Cerrar la consulta
+    // Cerrar la declaración
     $stmt->close();
     $conn->close();
 }

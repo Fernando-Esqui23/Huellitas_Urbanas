@@ -328,7 +328,8 @@ if ($search !== "") {
                                 <td class="actions">
 
                                 <a href="#" class="edit-btn" data-id="<?php echo urlencode($row['id']); ?>" data-nombre="<?php echo urlencode($row['nombre']); ?>" data-correo="<?php echo urlencode($row['correo']); ?>" data-usuario="<?php echo urlencode($row['usuario']); ?>" data-contraseña="<?php echo urlencode($row['contraseña']); ?>">Editar</a>
-                                <a href="vista_usuarios.php?action=delete&id=<?php echo urlencode($row['id']); ?>" class="delete-btn" onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?');">Eliminar</a>
+
+                                <a href="vista_usuarios.php?action=delete&id=<?php echo urlencode($row['id']); ?>" class="delete-btn" onclick="return confirmarEliminacion(event, this);">Eliminar</a>
                                 <!--
                                 <a href="#" class="edit-btn" data-id="<?php echo urlencode($row['id']); ?>" data-nombre="<?php echo urlencode($row['nombre']); ?>" data-correo="<?php echo urlencode($row['correo']); ?>" data-usuario="<?php echo urlencode($row['usuario']); ?>" data-contraseña="<?php echo urlencode($row['contraseña']); ?>"><img src="images/iconoeditar.png" alt="Editar" style="width: 20px; height: 20px;"></a>
                                 <a href="vista_usuarios.php?action=delete&id=<?php echo urlencode($row['id']); ?>" class="delete-btn" onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?');"><img src="images/iconoeliminar.png" alt="Eliminar" style="width: 20px; height: 20px;"></a>
@@ -344,6 +345,7 @@ if ($search !== "") {
                 </tbody>
             </table>
         </div>
+        
         
         <div class="top-buttons">
             <a href="registro_usuarios.html" class="center-button">Nuevo</a>
@@ -439,6 +441,32 @@ if ($search !== "") {
             });
         }
     </script>
+
+    <!-- Incluye SweetAlert2 desde un CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    function confirmarEliminacion(event, element) {
+        // Prevenir la acción predeterminada del enlace
+        event.preventDefault();
+
+        // Usamos SweetAlert2 para mostrar una confirmación personalizada
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¡Este registro será eliminado permanentemente!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar',
+            reverseButtons: true // Coloca los botones en orden inverso
+        }).then((result) => {
+            // Si el usuario confirma, redirigimos a la URL de eliminación
+            if (result.isConfirmed) {
+                window.location.href = element.href; // Redirige a la URL de eliminación
+            }
+        });
+    }
+</script>
 </body>
 </html>
 

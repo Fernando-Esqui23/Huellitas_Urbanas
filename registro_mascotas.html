@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Mascotas</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Incluye SweetAlert2 desde un CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <div class="container">
@@ -46,7 +48,7 @@
                 <div class="buttons">
                     <!-- Botón Regresar que lleva al usuario a la página anterior -->
                     <button type="button" class="regresar" onclick="redirigirAlMenu()">Regresar</button>
-                    <button type="submit">Guardar</button>
+                    <button type="submit">Registrar</button>
                     <!-- Botón Cancelar que limpia el formulario -->
                     <button type="button" class="logout" onclick="limpiarFormulario()">Cancelar</button>
                     
@@ -55,6 +57,21 @@
                 <script>
                     function redirigirAlMenu() {
                         window.location.href = 'main.html'; 
+                    }
+
+                                // Verificar si la URL contiene el parámetro `success=true`
+                    const urlParams = new URLSearchParams(window.location.search);
+                    if (urlParams.get('success') === 'true') {
+                        // Mostrar la alerta de éxito con SweetAlert2
+                        Swal.fire({
+                            title: '¡Éxito!',
+                            text: 'El registro se ha guardado con éxito.',
+                            icon: 'success',
+                            confirmButtonText: 'Aceptar'
+                        }).then(() => {
+                            // Redirigir a la página de adoptantes después de la alerta
+                            window.location.href = 'vista_mascotas.php';
+                        });
                     }
 
                     // Función para limpiar el formulario

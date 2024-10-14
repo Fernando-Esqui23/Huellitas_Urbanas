@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Adoptantes</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Incluye SweetAlert2 desde un CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <div class="container">
@@ -44,34 +46,40 @@
                 <input type="text" id="ocupacion" name="ocupacion" placeholder="Ingrese su ocupación" required>
 
                 <div class="buttons">
-                    <!-- Botón Regresar que lleva al usuario a la página anterior -->
                     <button type="button" class="regresar" onclick="redirigirAlMenu()">Regresar</button>
-                    <button type="submit">Guardar</button>
-                    <!-- Botón Cancelar que limpia el formulario -->
-                    <button type="button" class="logout" onclick="limpiarFormulario()">Cancelar</button>
-                    
+                    <button type="submit">Registrar</button>
+                    <button type="button" onclick="limpiarFormulario()">Cancelar</button>
                 </div>
-                <script>
-                    function redirigirAlMenu() {
-                        window.location.href = 'main.html'; 
-                    }
-                </script>
-                
-                <script>
-                    // Función para limpiar el formulario
-                    function limpiarFormulario() {
-                        // Obtén el formulario por su id
-                        const formulario = document.getElementById('formulario');
-                        
-                        // Resetea el formulario, limpiando todos los campos
-                        formulario.reset();
-
-                        
-                    }
-                </script>
-                
             </form>
         </div>
     </div>
+
+    <script>
+        // Verificar si la URL contiene el parámetro `success=true`
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('success') === 'true') {
+            // Mostrar la alerta de éxito con SweetAlert2
+            Swal.fire({
+                title: '¡Éxito!',
+                text: 'El registro se ha guardado con éxito.',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            }).then(() => {
+                // Redirigir a la página de adoptantes después de la alerta
+                window.location.href = 'vista_adoptantes.php';
+            });
+        }
+
+        // Función para limpiar el formulario
+        function limpiarFormulario() {
+            const formulario = document.getElementById('formulario');
+            formulario.reset();
+        }
+
+        function redirigirAlMenu() {
+            window.location.href = 'main.html'; 
+        }
+        
+    </script>
 </body>
 </html>

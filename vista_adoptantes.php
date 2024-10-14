@@ -335,9 +335,7 @@ if ($search !== "") {
                                 Editar
                                 </a>";
                                 
-                                echo "<a href='vista_adoptantes.php?action=delete&id=" . urlencode($row['id']) . "' class='delete-btn' onclick=\"return confirm('¿Estás seguro de que deseas eliminar este registro?');\" style='color: white; background-color: #dc3545; padding: 5px 10px; border-radius: 5px; text-decoration: none;'>
-                                Eliminar
-                                </a>";
+                                echo "<a href='vista_adoptantes.php?action=delete&id=" . urlencode($row['id']) . "' class='delete-btn' onclick=\"return confirmarEliminacion(event, this);\" style='color: white; background-color: #dc3545; padding: 5px 10px; border-radius: 5px; text-decoration: none;'>Eliminar</a>";
                             
                             
                                 echo "</td>";
@@ -480,6 +478,34 @@ if ($search !== "") {
     // Añadir el manejador de eventos para el botón "Actualizar Cambios"
     document.getElementById('saveChanges').addEventListener('click', saveChanges);
 </script>
+
+<!-- Incluye SweetAlert2 desde un CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    // Función para confirmar eliminación con SweetAlert2
+    function confirmarEliminacion(event, element) {
+        // Prevenir la acción predeterminada del enlace (evitar que se haga clic inmediatamente)
+        event.preventDefault();
+
+        // Usamos SweetAlert2 para mostrar una confirmación personalizada
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¡Este registro será eliminado permanentemente!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar',
+            reverseButtons: true // Coloca los botones en orden inverso
+        }).then((result) => {
+            // Si el usuario confirma, redirigimos a la URL de eliminación
+            if (result.isConfirmed) {
+                window.location.href = element.href; // Redirige a la URL de eliminación
+            }
+        });
+    }
+</script>
+
 
     </div>
 </body>

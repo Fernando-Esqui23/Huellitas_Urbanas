@@ -339,7 +339,7 @@ if ($search !== "") {
                                 <a href="vista_mascotas.php?action=delete&id=<?php echo urlencode($row['id']); ?>" class="delete-btn" onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?');"><img src="images/iconoeliminar.png" alt="Eliminar" style="width: 20px; height: 20px;"></a>
                                 -->
                                 <a href="#" class="edit-btn" onclick="openModal(<?php echo $row['id']; ?>, '<?php echo $row['tipo_mascota']; ?>', '<?php echo $row['nombre']; ?>', '<?php echo $row['fecha_rescate']; ?>', '<?php echo $row['edad']; ?>', '<?php echo $row['discapacidad']; ?>', '<?php echo $row['detalles_discapacidad']; ?>')">Editar</a>
-                                <a href="vista_mascotas.php?action=delete&id=<?php echo urlencode($row['id']); ?>" class="delete-btn" onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?');">Eliminar</a>
+                                <a href="vista_mascotas.php?action=delete&id=<?php echo urlencode($row['id']); ?>" class="delete-btn" onclick="return confirmarEliminacion(event, this);">Eliminar</a>
 
                                 </td>
                             </tr>
@@ -443,5 +443,34 @@ if ($search !== "") {
             });
         }
     </script>
+
+    <!-- Incluye SweetAlert2 desde un CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    // Función para confirmar eliminación con SweetAlert2
+    function confirmarEliminacion(event, element) {
+        // Prevenir la acción predeterminada del enlace (evitar que se haga clic inmediatamente)
+        event.preventDefault();
+
+        // Usamos SweetAlert2 para mostrar una confirmación personalizada
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¡Este registro será eliminado permanentemente!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar',
+            reverseButtons: true // Coloca los botones en orden inverso
+        }).then((result) => {
+            // Si el usuario confirma, redirigimos a la URL de eliminación
+            if (result.isConfirmed) {
+                window.location.href = element.href; // Redirige a la URL de eliminación
+            }
+        });
+    }
+
+    
+</script>
 </body>
 </html>
