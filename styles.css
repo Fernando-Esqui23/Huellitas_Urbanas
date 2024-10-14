@@ -198,6 +198,8 @@ select {
     border-radius: 5px;
   }
 
+<<<<<<< HEAD
+=======
   
 .obligatorio {
     font-size: 8px;
@@ -240,6 +242,7 @@ select {
 .buttons button:hover {
     opacity: 0.9;  /* Efecto de opacidad al pasar el cursor */
 }
+>>>>>>> 3a1f96199a2dbdaaabb2acf8654c4ada091ecbaf
 
 
 
