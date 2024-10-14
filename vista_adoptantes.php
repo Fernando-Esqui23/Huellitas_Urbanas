@@ -77,7 +77,7 @@ if ($search !== "") {
             margin-bottom: 20px;
         }
         .records {
-            margin-top: 20px;
+            margin-top: -20px;
         }
         table {
             width: 100%;
@@ -130,15 +130,7 @@ if ($search !== "") {
             background-color: #04B2D9;
             border-radius: 4px;
         }
-        .actions a:hover {
-            background-color: #0056b3;
-        }
-        .actions .delete-btn {
-            background-color: #dc3545; /* Color rojo para el botón de eliminar */
-        }
-        .actions .delete-btn:hover {
-            background-color: #c82333;
-        }
+       
 
         /* Estilos para el modal */
         .modal {
@@ -292,19 +284,7 @@ if ($search !== "") {
         <header class="header">
             <h1>Vista de Adoptantes</h1>
         </header>
-  <!-- Contenedor para los botones en la parte superior -->
-        <div class="top-buttons">
-            <a href="registro_adoptantes.html" class="center-button">Nuevo</a>
-            <a href="main.html" class="center-button">Regresar</a>
-        </div>
-
-        <form action="generar_pdf.php" method="get" class="search-form">
-            <label for="id">Ingrese el ID:</label>
-            <input type="text" id="id" name="id" required>
-            <input type="submit" value="Generar PDF">
-        </form>
-
-
+  
         <!-- Formulario de búsqueda -->
         <div class="search-form">
             <form method="GET" action="vista_adoptantes.php">
@@ -318,7 +298,7 @@ if ($search !== "") {
         </div>
 
         <div class="records">
-            <h2>Registros de Adoptantes</h2>
+            <!--<h2>Registros de Adoptantes</h2>-->
             <table>
                 <thead>
                     <tr>
@@ -335,6 +315,39 @@ if ($search !== "") {
                     </tr>
                 </thead>
                 <tbody>
+                    <?php
+                        if ($result && $result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<tr>";
+                                echo "<td>{$row['id']}</td>";
+                                echo "<td>{$row['nombre']}</td>";
+                                echo "<td>{$row['genero']}</td>";
+                                echo "<td>{$row['edad']}</td>";
+                                echo "<td>{$row['dui']}</td>";
+                                echo "<td>{$row['telefono']}</td>";
+                                echo "<td>{$row['correo']}</td>";
+                                echo "<td>{$row['direccion']}</td>";
+                                echo "<td>{$row['ocupacion']}</td>";
+                                echo "<td class='actions'>";
+                                echo "<a href='generar_pdf.php?id={$row['id']}'>Generar PDF</a>";
+
+                                echo "<a href='#' class='edit-btn' onclick=\"openModal({$row['id']}, '{$row['nombre']}', '{$row['genero']}', '{$row['edad']}', '{$row['dui']}', '{$row['telefono']}', '{$row['correo']}', '{$row['direccion']}', '{$row['ocupacion']}');\">
+                                Editar
+                                </a>";
+                                
+                                echo "<a href='vista_adoptantes.php?action=delete&id=" . urlencode($row['id']) . "' class='delete-btn' onclick=\"return confirm('¿Estás seguro de que deseas eliminar este registro?');\" style='color: white; background-color: #dc3545; padding: 5px 10px; border-radius: 5px; text-decoration: none;'>
+                                Eliminar
+                                </a>";
+                            
+                            
+                                echo "</td>";
+                                echo "</tr>";
+                                
+                            }
+                        } else {
+                            echo "<tr><td colspan='3'>No se encontraron registros</td></tr>";
+                        }
+                    ?>
                     <?php if ($result->num_rows > 0): ?>
                         <?php while($row = $result->fetch_assoc()): ?>
                             <tr>
@@ -360,6 +373,11 @@ if ($search !== "") {
                     <?php endif; ?>
                 </tbody>
             </table>
+        </div>
+        <!-- Contenedor para los botones en la parte superior -->
+        <div class="top-buttons">
+            <a href="registro_adoptantes.html" class="center-button">Nuevo</a>
+            <a href="main.html" class="center-button">Regresar</a>
         </div>
 
         <!-- Modal para editar un adoptante -->

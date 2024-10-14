@@ -77,7 +77,7 @@ if ($search !== "") {
             margin-bottom: 20px;
         }
         .records {
-            margin-top: 20px;
+            margin-top: -20px;
         }
         table {
             width: 100%;
@@ -293,11 +293,7 @@ if ($search !== "") {
             <h1>Vista de Mascotas</h1>
         </header>
 
-        <!-- Contenedor para los botones en la parte superior -->
-        <div class="top-buttons">
-            <a href="registro_mascotas.html" class="center-button">Nuevo</a>
-            <a href="main.html" class="center-button">Regresar</a>
-        </div>
+        
 
         <!-- Formulario de búsqueda -->
         <div class="search-form">
@@ -312,7 +308,7 @@ if ($search !== "") {
         </div>
 
         <div class="records">
-            <h2>Registros de Mascotas</h2>
+           <!-- <h2>Registros de Mascotas</h2>-->
             <table>
                 <thead>
                     <tr>
@@ -338,8 +334,13 @@ if ($search !== "") {
                                 <td><?php echo $row['discapacidad']; ?></td>
                                 <td><?php echo $row['detalles_discapacidad']; ?></td>
                                 <td class="actions">
-                                    <a href="#" class="edit-btn" onclick="openModal(<?php echo $row['id']; ?>, '<?php echo $row['tipo_mascota']; ?>', '<?php echo $row['nombre']; ?>', '<?php echo $row['fecha_rescate']; ?>', '<?php echo $row['edad']; ?>', '<?php echo $row['discapacidad']; ?>', '<?php echo $row['detalles_discapacidad']; ?>')">Editar</a>
-                                    <a href="vista_mascotas.php?action=delete&id=<?php echo urlencode($row['id']); ?>" class="delete-btn" onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?');">Eliminar</a>
+                                <!--
+                                <a href="#" class="edit-btn" onclick="openModal(<?php echo $row['id']; ?>, '<?php echo $row['tipo_mascota']; ?>', '<?php echo $row['nombre']; ?>', '<?php echo $row['fecha_rescate']; ?>', '<?php echo $row['edad']; ?>', '<?php echo $row['discapacidad']; ?>', '<?php echo $row['detalles_discapacidad']; ?>')"><img src="images/iconoeditar.png" alt="Editar" style="width: 20px; height: 20px;"></a>
+                                <a href="vista_mascotas.php?action=delete&id=<?php echo urlencode($row['id']); ?>" class="delete-btn" onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?');"><img src="images/iconoeliminar.png" alt="Eliminar" style="width: 20px; height: 20px;"></a>
+                                -->
+                                <a href="#" class="edit-btn" onclick="openModal(<?php echo $row['id']; ?>, '<?php echo $row['tipo_mascota']; ?>', '<?php echo $row['nombre']; ?>', '<?php echo $row['fecha_rescate']; ?>', '<?php echo $row['edad']; ?>', '<?php echo $row['discapacidad']; ?>', '<?php echo $row['detalles_discapacidad']; ?>')">Editar</a>
+                                <a href="vista_mascotas.php?action=delete&id=<?php echo urlencode($row['id']); ?>" class="delete-btn" onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?');">Eliminar</a>
+
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -351,7 +352,11 @@ if ($search !== "") {
                 </tbody>
             </table>
         </div>
-
+<!-- Contenedor para los botones en la parte superior -->
+<div class="top-buttons">
+            <a href="registro_mascotas.html" class="center-button">Nuevo</a>
+            <a href="main.html" class="center-button">Regresar</a>
+        </div>
       <!-- Modal para editar una mascota -->
 <div id="editModal" class="modal">
     <div class="modal-content">

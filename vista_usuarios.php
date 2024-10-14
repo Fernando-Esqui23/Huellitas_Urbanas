@@ -76,7 +76,7 @@ if ($search !== "") {
             margin-bottom: 20px;
         }
         .records {
-            margin-top: 20px;
+            margin-top: -20px;
         }
         table {
             width: 100%;
@@ -290,10 +290,6 @@ if ($search !== "") {
             <h1>Vista de Usuarios</h1>
         </header>
 
-        <div class="top-buttons">
-            <a href="registro_usuarios.html" class="center-button">Nuevo</a>
-            <a href="main.html" class="center-button">Regresar</a>
-        </div>
 
         <!-- Formulario de búsqueda -->
         <div class="search-form">
@@ -308,7 +304,7 @@ if ($search !== "") {
         </div>
 
         <div class="records">
-            <h2>Registros de Usuarios</h2>
+           <!-- <h2>Registros de Usuarios</h2>-->
             <table>
                 <thead>
                     <tr>
@@ -330,8 +326,13 @@ if ($search !== "") {
                                 <td><?php echo htmlspecialchars($row['usuario']); ?></td>
                                 <td><?php echo htmlspecialchars($row['contraseña']); ?></td>
                                 <td class="actions">
-                                    <a href="#" class="edit-btn" data-id="<?php echo urlencode($row['id']); ?>" data-nombre="<?php echo urlencode($row['nombre']); ?>" data-correo="<?php echo urlencode($row['correo']); ?>" data-usuario="<?php echo urlencode($row['usuario']); ?>" data-contraseña="<?php echo urlencode($row['contraseña']); ?>">Editar</a>
-                                    <a href="vista_usuarios.php?action=delete&id=<?php echo urlencode($row['id']); ?>" class="delete-btn" onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?');">Eliminar</a>
+
+                                <a href="#" class="edit-btn" data-id="<?php echo urlencode($row['id']); ?>" data-nombre="<?php echo urlencode($row['nombre']); ?>" data-correo="<?php echo urlencode($row['correo']); ?>" data-usuario="<?php echo urlencode($row['usuario']); ?>" data-contraseña="<?php echo urlencode($row['contraseña']); ?>">Editar</a>
+                                <a href="vista_usuarios.php?action=delete&id=<?php echo urlencode($row['id']); ?>" class="delete-btn" onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?');">Eliminar</a>
+                                <!--
+                                <a href="#" class="edit-btn" data-id="<?php echo urlencode($row['id']); ?>" data-nombre="<?php echo urlencode($row['nombre']); ?>" data-correo="<?php echo urlencode($row['correo']); ?>" data-usuario="<?php echo urlencode($row['usuario']); ?>" data-contraseña="<?php echo urlencode($row['contraseña']); ?>"><img src="images/iconoeditar.png" alt="Editar" style="width: 20px; height: 20px;"></a>
+                                <a href="vista_usuarios.php?action=delete&id=<?php echo urlencode($row['id']); ?>" class="delete-btn" onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?');"><img src="images/iconoeliminar.png" alt="Eliminar" style="width: 20px; height: 20px;"></a>
+                                -->
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -342,6 +343,11 @@ if ($search !== "") {
                     <?php endif; ?>
                 </tbody>
             </table>
+        </div>
+        
+        <div class="top-buttons">
+            <a href="registro_usuarios.html" class="center-button">Nuevo</a>
+            <a href="main.html" class="center-button">Regresar</a>
         </div>
     </div>
 

@@ -13,6 +13,7 @@
         </header>
         <div class="form-container">
             <img src="images/iconomascota.png" alt="Imagen Pequeña" class="small-image">
+<<<<<<< HEAD
             <form action="formulario_mascotas.php" method="post">
 
                 
@@ -25,14 +26,27 @@
                 
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" required>
+=======
+            <form id="formulario" action="formulario_mascotas.php" method="post">
                 
-                <label for="fecha-rescate">Fecha de Rescate:</label>
+                <label for="tipo-mascota">Tipo de Mascota: <span class="obligatorio">*</span></label>
+                <select name="tipo-mascota" id="tipo-mascota" required>
+                    <option value="">Selecciona el tipo de mascota</option>
+                    <option value="perro">Perro</option>
+                    <option value="gato">Gato</option>
+                </select>
+
+                <label for="nombre">Nombre: <span class="obligatorio">*</span></label>
+                <input type="text" id="nombre" name="nombre" placeholder="Ingrese el nombre de la mascota" required>
+>>>>>>> 3a1f96199a2dbdaaabb2acf8654c4ada091ecbaf
+                
+                <label for="fecha-rescate">Fecha de Rescate: <span class="obligatorio">*</span></label>
                 <input type="date" id="fecha-rescate" name="fecha-rescate" required>
                 
-                <label for="edad">Edad Aproximada (En Meses):</label>
-                <input type="number" id="edad" name="edad" required>
+                <label for="edad">Edad Aproximada (En Meses): <span class="obligatorio">*</span></label>
+                <input type="number" id="edad" name="edad" placeholder="Ingrese la edad en meses" required>
 
-                <label for="discapacidad">Discapacidad:</label>
+                <label for="discapacidad">Discapacidad: <span class="obligatorio">*</span></label>
                 <div>
                     <input type="radio" id="discapacidad-si" name="discapacidad" value="Sí" onclick="toggleDetalles(true)">
                     <label for="discapacidad-si">Sí</label>
@@ -41,15 +55,32 @@
                     <label for="discapacidad-no">No</label>
                 </div>
 
-                <label for="detalles-discapacidad" id="detalles-discapacidad-label">Detalles de Discapacidad:</label>
-                <input type="text" id="detalles-discapacidad" name="detalles-discapacidad">
+                <label for="detalles-discapacidad" id="detalles-discapacidad-label" style="display: none;">Detalles de Discapacidad:</label>
+                <input type="text" id="detalles-discapacidad" name="detalles-discapacidad" placeholder="Ingrese detalles de la discapacidad" style="display: none;">
                 
                 <div class="buttons">
-                    <button type="submit">Registrar</button>
-                    <button type="button" class="logout" onclick="redirigirmenu()">Cancelar</button>
+                    <!-- Botón Regresar que lleva al usuario a la página anterior -->
+                    <button type="button" class="regresar" onclick="redirigirAlMenu()">Regresar</button>
+                    <button type="submit">Guardar</button>
+                    <!-- Botón Cancelar que limpia el formulario -->
+                    <button type="button" class="logout" onclick="limpiarFormulario()">Cancelar</button>
+                    
                 </div>
-                
+
                 <script>
+                    function redirigirAlMenu() {
+                        window.location.href = 'main.html'; 
+                    }
+
+                    // Función para limpiar el formulario
+                    function limpiarFormulario() {
+                        // Obtén el formulario por su id
+                        const formulario = document.getElementById('formulario');
+                        
+                        // Resetea el formulario, limpiando todos los campos
+                        formulario.reset();
+                    }
+
                     function toggleDetalles(show) {
                         var detallesLabel = document.getElementById('detalles-discapacidad-label');
                         var detallesInput = document.getElementById('detalles-discapacidad');
@@ -67,12 +98,7 @@
                     window.onload = function() {
                         toggleDetalles(false);
                     };
-
-                    function redirigirmenu() {
-                        window.location.href = 'main.html';
-                    }
-                    </script>
-                
+                </script>
                 
             </form>
         </div>

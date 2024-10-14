@@ -13,6 +13,7 @@
         </header>
         <div class="form-container">
             <img src="images/iconoadoptante.png" alt="Imagen Pequeña" class="small-image">
+<<<<<<< HEAD
             <form action="formulario_adoptantes.php" method="post">
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" required>
@@ -27,33 +28,62 @@
                         <option value="otro">Otro</option>
                     </select>
                                
+=======
+            <form id="formulario" action="formulario_adoptantes.php" method="post">
+                <label for="nombre">Nombre:  <span class="obligatorio">*</span></label>
+                <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre completo" required>
+        
+                <label for="genero">Género:  <span class="obligatorio">*</span></label>
+                <select name="genero" id="genero" required>
+                    <option value="">Selecciona tu género</option>
+                    <option value="masculino">Masculino</option>
+                    <option value="femenino">Femenino</option>
+                    <option value="otro">Otro</option>
+                </select>
                 
-                <label for="edad">Edad:</label>
-                <input type="number" id="edad" name="edad" required>
+                <label for="edad">Edad: <span class="obligatorio">*</span></label>
+                <input type="number" id="edad" name="edad" placeholder="Ingrese su edad" required>
+>>>>>>> 3a1f96199a2dbdaaabb2acf8654c4ada091ecbaf
                 
-                <label for="dui">DUI:</label>
-                <input type="text" id="dui" name="dui" required>
+                <label for="dui">DUI: <span class="obligatorio">*</span></label>
+                <input type="text" id="dui" name="dui" placeholder="00000000" required>
 
-                <label for="telefono">Telefono:</label>
-                <input type="text" id="telefono" name="telefono" required>
+                <label for="telefono">Teléfono: <span class="obligatorio">*</span></label>
+                <input type="text" id="telefono" name="telefono" placeholder="00000000" required>
 
-                <label for="correo">Correo electrónico:</label>
-                <input type="email" id="correo" name="correo" required>
+                <label for="correo">Correo electrónico: <span class="obligatorio">*</span></label>
+                <input type="email" id="correo" name="correo" placeholder="ejemplo@correo.com" required>
                 
-                <label for="direccion">Dirección:</label>
-                <input type="text" id="direccion" name="direccion" required>
+                <label for="direccion">Dirección: <span class="obligatorio">*</span></label>
+                <input type="text" id="direccion" name="direccion" placeholder="Ingrese su dirección" required>
 
-                <label for="ocupacion">Ocupación:</label>
-                <input type="text" id="ocupacion" name="ocupacion" required>
+                <label for="ocupacion">Ocupación: <span class="obligatorio">* </span></label>
+                <input type="text" id="ocupacion" name="ocupacion" placeholder="Ingrese su ocupación" required>
 
                 <div class="buttons">
+                    <!-- Botón Regresar que lleva al usuario a la página anterior -->
+                    <button type="button" class="regresar" onclick="redirigirAlMenu()">Regresar</button>
                     <button type="submit">Guardar</button>
-                    <button type="button" class="logout" onclick="redirigirmenu()">Cancelar</button>
+                    <!-- Botón Cancelar que limpia el formulario -->
+                    <button type="button" class="logout" onclick="limpiarFormulario()">Cancelar</button>
+                    
                 </div>
+                <script>
+                    function redirigirAlMenu() {
+                        window.location.href = 'main.html'; 
+                    }
+                </script>
                 
                 <script>
-                    function redirigirmenu() {
-                        window.location.href = 'main.html';
+                    // Función para limpiar el formulario
+                    function limpiarFormulario() {
+                        // Obtén el formulario por su id
+                        const formulario = document.getElementById('formulario');
+                        
+                        // Resetea el formulario, limpiando todos los campos
+                        formulario.reset();
+
+                        
                     }
                 </script>
                 
