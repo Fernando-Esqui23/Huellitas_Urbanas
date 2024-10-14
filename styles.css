@@ -187,4 +187,18 @@ button:hover {
     color: #ffffff;
 }
 
+select {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font-family: Arial, sans-serif;
+    outline: 0;
+    background:ffff;
+    color: #181616;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+
+
+
 

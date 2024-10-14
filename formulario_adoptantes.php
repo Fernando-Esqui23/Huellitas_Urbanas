@@ -44,15 +44,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result_check = $stmt_check->get_result();
 
     if ($result_check->num_rows > 0) {
+        $stmt_check->close();
+        $conn->close();
         echo "<script>
                 alert('El correo electrónico ya está registrado.');
                 window.location.href = 'registro_adoptantes.html';
               </script>";
-        $stmt_check->close();
-        $conn->close();
         exit();
     }
-    $stmt_check->close();
     $stmt_check->close();
 
     // Insertar un nuevo registro
@@ -69,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Error al insertar el registro: " . $stmt->error;
     }
 
-    // Cerrar la consulta
+    // Cerrar la declaración
     $stmt->close();
     $conn->close();
 }
