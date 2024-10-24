@@ -347,8 +347,6 @@ if ($search !== "") {
         <i class="fas fa-trash-alt"></i>
     </a>
 </td>
-
-                                </td>
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
@@ -362,7 +360,7 @@ if ($search !== "") {
 <!-- Contenedor para los botones en la parte superior -->
 <div class="top-buttons">
             <a href="registro_mascotas.html" class="center-button">Nuevo</a>
-            <a href="main.html" class="center-button">Regresar</a>
+            <a href="#" id="regresarBtn" class="center-button">Regresar</a>
         </div>
       <!-- Modal para editar una mascota -->
 <div id="editModal" class="modal">
@@ -477,19 +475,25 @@ if ($search !== "") {
         });
     }
 
-    <td class="actions">
-    <!-- Botón de editar con ícono de Font Awesome -->
-    <a href="#" class="edit-btn" onclick="openModal(<?php echo $row['id']; ?>, '<?php echo $row['tipo_mascota']; ?>', '<?php echo $row['nombre']; ?>', '<?php echo $row['fecha_rescate']; ?>', '<?php echo $row['edad']; ?>', '<?php echo $row['discapacidad']; ?>', '<?php echo $row['detalles_discapacidad']; ?>')">
-        <i class="fas fa-edit"></i>
-    </a>
 
-    <!-- Botón de eliminar con ícono de Font Awesome -->
-    <a href="vista_mascotas.php?action=delete&id=<?php echo urlencode($row['id']); ?>" class="delete-btn" onclick="return confirmarEliminacion(event, this);">
-        <i class="fas fa-trash-alt"></i>
-    </a>
-</td>
-
+document.getElementById('regresarBtn').addEventListener('click', function(event) {
+    event.preventDefault(); // Evitar la acción predeterminada del enlace
     
-</script>
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "desea regresar al menu principal.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, regresar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = 'main.html'; // Redireccionar si confirma
+        }
+    });
+});
+
 </body>
 </html>

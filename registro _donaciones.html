@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Donaciones</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Incluye SweetAlert2 desde un CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <div class="container">
@@ -13,51 +15,100 @@
         </header>
         <div class="form-container">
             <img src="images/iconodonacion.png" alt="Imagen Pequeña" class="small-image">
-            <form action="formulario_donaciones.php" method="post">
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" required>
-                
-                <label for="direccion">Direccion:</label>
-                <input type="text" id="direccion" name="direccion" required>
-                
-                <label for="telefono">Telefono:</label>
-                <input type="number" id="telefono" name="telefono" required>
-                
-                <label for="dui">DUI:</label>
-                <input type="number" id="dui" name="dui" required>
-                
-                <label for="correo-electronico">Correo electronico:</label>
-                <input type="email" id="correo-electronico" name="correo-electronico" required>
+            
+            <form id="formulario" action="formulario_donaciones.php" method="post">
+                <label for="nombre">Nombre: <span class="obligatorio">*</span></label>
+                <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre completo" required>
 
-                <label for="monto">Monto:</label>
-                <input type="number" id="monto" name="monto" required>
+                <label for="direccion">Direccion: <span class="obligatorio">*</span></label>
+                <input type="text" id="direccion" name="direccion" placeholder="Ingrese su direccion" required>
 
-                <label for="frecuencia-donacion">Frecuencia de donacion:</label>
-                <input type="text" id="frecuencia-donacion" name="frecuencia-donacion" required>
+                <label for="telefono">Telefono: <span class="obligatorio">*</span></label>
+                <input type="number" id="telefono" name="telefono" placeholder="Ingrese su numero de telefono" required>
 
-                <label for="metodo-pago">Metodo de pago:</label>
-                <input type="tetx" id="metodo-pago" name="metodo-pago" required>
+                <label for="dui">DUI: <span class="obligatorio">*</span></label>
+                <input type="number" id="dui" name="dui" placeholder="Ingrese su numero de DUI" required>
 
-                <label for="fecha-donacion">Fecha de donacion:</label>
+                <label for="correo-electronico">Correo electronico: <span class="obligatorio">*</span></label>
+                <input type="email" id="correo-electronico" name="correo-electronico" placeholder="ejemplo@correo.com" required>
+
+                <label for="monto">Monto: <span class="obligatorio">*</span></label>
+                <input type="number" id="monto" name="monto" placeholder="ingrese el monto" required>
+
+                <label for="frecuencia-donacion">Frecuencia de donacion: <span class="obligatorio">*</span> </label>
+                <select name="frecuencia-donacion" id="frecuencia-donacion" required>
+                    <option value="">Selecciona</option>
+                    <option value="masculino">Semanal</option>
+                    <option value="femenino">Mensual</option>
+                    <option value="otro">Anual</option>
+                </select>
+
+
+                <label for="metodo-pago">Metodo de pago: <span class="obligatorio">*</span> </label>
+                <select name="metodo-pago" id="metodo-pago" required>
+                    <option value="">Selecciona</option>
+                    <option value="masculino">Efectivo</option>
+                    <option value="femenino">Transferencia</option>
+                </select>
+
+                <label for="fecha-donacion">Fecha de donacion: <span class="obligatorio">*</span></label>
                 <input type="date" id="fecha-donacion" name="fecha-donacion" required>
 
-                <label for="destino-donacion">Destino de la donacion:</label>
-                <input type="text" id="destino-donacion" name="destino-donacion" required>
+                <label for="destino-donacion">Destino de la donacion: <span class="obligatorio">*</span> </label>
+                <select name="destino-donacion" id="destino-donacion" required>
+                    <option value="">Selecciona</option>
+                    <option value="masculino">Alimento</option>
+                    <option value="femenino">Limpieza</option>
+                </select>
+
 
                 <div class="buttons">
-                    <button type="submit">Guardar</button>
-                    <button type="button" class="logout" onclick="redirigirmenu()">Cancelar</button>
+                    <button type="button" class="regresar" onclick="redirigirAlMenu()">Regresar</button>
+                    <button type="submit" onclick="mostrarAlertaExito()">Guardar</button>
+                    <button type="button" onclick="limpiarFormulario()">Cancelar</button>
                 </div>
-                
-                <script>
-                    function redirigirmenu() {
-                        window.location.href = 'main.html';
-                    }
-                </script>
-                
-                
             </form>
         </div>
     </div>
+
+    <script>
+        // Verificar si la URL contiene el parámetro `success=true`
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('success') === 'true') {
+            // Mostrar la alerta de éxito con SweetAlert2
+            Swal.fire({
+                title: '¡Éxito!',
+                text: 'El registro de la donación se ha guardado con éxito.',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            }).then(() => {
+                // Redirigir a la página de vista de donaciones después de la alerta
+                window.location.href = 'vista_donaciones.php';
+            });
+        }
+
+        // Función para limpiar el formulario
+        function limpiarFormulario() {
+            document.getElementById('formulario').reset();
+        }
+
+        // Función para mostrar alerta de éxito y redirigir
+        function mostrarAlertaExito() {
+            event.preventDefault(); // Evitar el envío inmediato del formulario
+            Swal.fire({
+                title: '¡Éxito!',
+                text: 'El registro de la donación se ha guardado con éxito.',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            }).then(() => {
+                document.getElementById('formulario').submit(); // Enviar el formulario tras la alerta
+            });
+        }
+
+        // Función para redirigir al menú principal
+        function redirigirAlMenu() {
+            window.location.href = 'main.html'; 
+        }
+    </script>
 </body>
 </html>

@@ -353,7 +353,7 @@ if ($search !== "") {
         
         <div class="top-buttons">
             <a href="registro_usuarios.html" class="center-button">Nuevo</a>
-            <a href="main.html" class="center-button">Regresar</a>
+            <a href="#" id="regresarBtn" class="center-button">Regresar</a>
         </div>
     </div>
 
@@ -471,6 +471,28 @@ if ($search !== "") {
         });
     }
 </script>
+
+<script>
+document.getElementById('regresarBtn').addEventListener('click', function(event) {
+    event.preventDefault(); // Evitar la acción predeterminada del enlace
+    
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "desea regresar al menu principal.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, regresar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = 'main.html'; // Redireccionar si confirma
+        }
+    });
+});
+</script>
+
 </body>
 </html>
 
