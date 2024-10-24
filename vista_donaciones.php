@@ -291,11 +291,6 @@ if ($search !== "") {
             <h1>Vista de Donaciones</h1>
         </header>
 
-        <div class="top-buttons">
-            <a href="registro _donaciones.html" class="center-button">Nuevo</a>
-            <a href="main.html" class="center-button">Regresar</a>
-        </div>
-
         <div class="search-form">
             <form method="GET" action="vista_donaciones.php">
                 <label for="search">Buscar por Nombre:</label>
@@ -308,7 +303,7 @@ if ($search !== "") {
         </div>
 
         <div class="records">
-            <h2>Registros de Donaciones</h2>
+        <!-- <h2>Registros de Donaciones</h2>-->
             <table>
                 <thead>
                     <tr>
@@ -343,7 +338,7 @@ if ($search !== "") {
                                 <td><?php echo htmlspecialchars($row['destino_donacion']); ?></td>
                                 <td class="actions">
                                 <a href="#" class="edit-btn" data-id="<?php echo urlencode($row['id']); ?>" data-nombre="<?php echo urlencode($row['nombre']); ?>" data-direccion="<?php echo urlencode($row['direccion']); ?>" data-telefono="<?php echo urlencode($row['telefono']); ?>" data-dui="<?php echo urlencode($row['dui']); ?>" data-correo_electronico="<?php echo urlencode($row['correo_electronico']); ?>" data-monto="<?php echo urlencode($row['monto']); ?>" data-frecuencia_donacion="<?php echo urlencode($row['frecuencia_donacion']); ?>" data-metodo_pago="<?php echo urlencode($row['metodo_pago']); ?>" data-fecha_donacion="<?php echo urlencode($row['fecha_donacion']); ?>" data-destino_donacion="<?php echo urlencode($row['destino_donacion']); ?>"><img src="images/iconoeditar.png" alt="Editar" style="width: 20px; height: 20px;"></a>
-                                <a href="vista_donaciones.php?action=delete&id=<?php echo urlencode($row['id']); ?>" class="delete-btn" onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?');"><img src="images/iconoeliminar.png" alt="Eliminar" style="width: 20px; height: 20px;"></a>
+                                <a href="vista_donaciones.php?action=delete&id=<?php echo urlencode($row['id']); ?>" class="delete-btn" onclick="confirmarEliminacion(event, this)">Eliminar</a>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -355,6 +350,12 @@ if ($search !== "") {
                 </tbody>
             </table>
         </div>
+        
+        <div class="top-buttons">
+            <a href="registro_adoptantes.html" class="center-button">Nuevo</a>
+            <a href="#" id="regresarBtn" class="center-button">Regresar</a>
+            </div>
+
     </div>
 
     <!-- Modal de Edición -->
@@ -462,5 +463,55 @@ if ($search !== "") {
             });
         }
     </script>
+
+        <!-- Incluye SweetAlert2 desde un CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <script>
+            // Función para confirmar eliminación con SweetAlert2
+            function confirmarEliminacion(event, element) {
+                // Prevenir la acción predeterminada del enlace
+                event.preventDefault();
+
+                // Usamos SweetAlert2 para mostrar una confirmación personalizada
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: "¡Este registro será eliminado permanentemente!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sí, eliminar',
+                    cancelButtonText: 'Cancelar',
+                    reverseButtons: true // Coloca los botones en orden inverso
+                }).then((result) => {
+                    // Si el usuario confirma, redirigimos a la URL de eliminación
+                    if (result.isConfirmed) {
+                        window.location.href = element.href; // Redirige a la URL de eliminación
+                    }
+                });
+            }
+        </script>
+
+<script>
+document.getElementById('regresarBtn').addEventListener('click', function(event) {
+    event.preventDefault(); // Evitar la acción predeterminada del enlace
+    
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "desea regresar al menu principal.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, regresar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = 'main.html'; // Redireccionar si confirma
+        }
+    });
+});
+</script>
+        
+
 </body>
 </html>
