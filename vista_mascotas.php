@@ -301,6 +301,8 @@ if ($search !== "") {
                 <label for="search">Buscar por Nombre:</label>
                 <input type="text" id="search" name="search" value="<?php echo htmlspecialchars($search); ?>">
                 <input type="submit" value="Buscar">
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
                 <?php if ($search !== ""): ?>
                     <a href="vista_mascotas.php">Mostrar Todos</a>
                 <?php endif; ?>
@@ -333,13 +335,18 @@ if ($search !== "") {
                                 <td><?php echo $row['edad']; ?></td>
                                 <td><?php echo $row['discapacidad']; ?></td>
                                 <td><?php echo $row['detalles_discapacidad']; ?></td>
+                               
                                 <td class="actions">
-                                <!--
-                                <a href="#" class="edit-btn" onclick="openModal(<?php echo $row['id']; ?>, '<?php echo $row['tipo_mascota']; ?>', '<?php echo $row['nombre']; ?>', '<?php echo $row['fecha_rescate']; ?>', '<?php echo $row['edad']; ?>', '<?php echo $row['discapacidad']; ?>', '<?php echo $row['detalles_discapacidad']; ?>')"><img src="images/iconoeditar.png" alt="Editar" style="width: 20px; height: 20px;"></a>
-                                <a href="vista_mascotas.php?action=delete&id=<?php echo urlencode($row['id']); ?>" class="delete-btn" onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?');"><img src="images/iconoeliminar.png" alt="Eliminar" style="width: 20px; height: 20px;"></a>
-                                -->
-                                <a href="#" class="edit-btn" onclick="openModal(<?php echo $row['id']; ?>, '<?php echo $row['tipo_mascota']; ?>', '<?php echo $row['nombre']; ?>', '<?php echo $row['fecha_rescate']; ?>', '<?php echo $row['edad']; ?>', '<?php echo $row['discapacidad']; ?>', '<?php echo $row['detalles_discapacidad']; ?>')">Editar</a>
-                                <a href="vista_mascotas.php?action=delete&id=<?php echo urlencode($row['id']); ?>" class="delete-btn" onclick="return confirmarEliminacion(event, this);">Eliminar</a>
+    <!-- Botón de editar con ícono de Font Awesome -->
+    <a href="#" class="edit-btn" onclick="openModal(<?php echo $row['id']; ?>, '<?php echo $row['tipo_mascota']; ?>', '<?php echo $row['nombre']; ?>', '<?php echo $row['fecha_rescate']; ?>', '<?php echo $row['edad']; ?>', '<?php echo $row['discapacidad']; ?>', '<?php echo $row['detalles_discapacidad']; ?>')">
+        <i class="fas fa-edit"></i>
+    </a>
+
+    <!-- Botón de eliminar con ícono de Font Awesome -->
+    <a href="vista_mascotas.php?action=delete&id=<?php echo urlencode($row['id']); ?>" class="delete-btn" onclick="return confirmarEliminacion(event, this);">
+        <i class="fas fa-trash-alt"></i>
+    </a>
+</td>
 
                                 </td>
                             </tr>
@@ -469,6 +476,18 @@ if ($search !== "") {
             }
         });
     }
+
+    <td class="actions">
+    <!-- Botón de editar con ícono de Font Awesome -->
+    <a href="#" class="edit-btn" onclick="openModal(<?php echo $row['id']; ?>, '<?php echo $row['tipo_mascota']; ?>', '<?php echo $row['nombre']; ?>', '<?php echo $row['fecha_rescate']; ?>', '<?php echo $row['edad']; ?>', '<?php echo $row['discapacidad']; ?>', '<?php echo $row['detalles_discapacidad']; ?>')">
+        <i class="fas fa-edit"></i>
+    </a>
+
+    <!-- Botón de eliminar con ícono de Font Awesome -->
+    <a href="vista_mascotas.php?action=delete&id=<?php echo urlencode($row['id']); ?>" class="delete-btn" onclick="return confirmarEliminacion(event, this);">
+        <i class="fas fa-trash-alt"></i>
+    </a>
+</td>
 
     
 </script>

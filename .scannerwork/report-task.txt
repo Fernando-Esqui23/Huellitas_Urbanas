@@ -1,0 +1,6 @@
+projectKey=huellitas
+serverUrl=http://localhost:9000
+serverVersion=8.9.10.61524
+dashboardUrl=http://localhost:9000/dashboard?id=huellitas
+ceTaskId=AZKMqjxl07KX1d8PQyjY
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AZKMqjxl07KX1d8PQyjY

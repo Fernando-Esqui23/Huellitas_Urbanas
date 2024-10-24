@@ -291,6 +291,8 @@ if ($search !== "") {
                 <label for="search">Buscar por Nombre:</label>
                 <input type="text" id="search" name="search" value="<?php echo htmlspecialchars($search); ?>">
                 <input type="submit" value="Buscar">
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
                 <?php if ($search !== ""): ?>
                     <a href="vista_adoptantes.php">Mostrar Todos</a>
                 <?php endif; ?>
@@ -315,61 +317,44 @@ if ($search !== "") {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                        if ($result && $result->num_rows > 0) {
-                            while ($row = $result->fetch_assoc()) {
-                                echo "<tr>";
-                                echo "<td>{$row['id']}</td>";
-                                echo "<td>{$row['nombre']}</td>";
-                                echo "<td>{$row['genero']}</td>";
-                                echo "<td>{$row['edad']}</td>";
-                                echo "<td>{$row['dui']}</td>";
-                                echo "<td>{$row['telefono']}</td>";
-                                echo "<td>{$row['correo']}</td>";
-                                echo "<td>{$row['direccion']}</td>";
-                                echo "<td>{$row['ocupacion']}</td>";
-                                echo "<td class='actions'>";
-                                echo "<a href='generar_pdf.php?id={$row['id']}'>Generar PDF</a>";
+    <?php
+    if ($result && $result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo "<tr>";
+            echo "<td>{$row['id']}</td>";
+            echo "<td>{$row['nombre']}</td>";
+            echo "<td>{$row['genero']}</td>";
+            echo "<td>{$row['edad']}</td>";
+            echo "<td>{$row['dui']}</td>";
+            echo "<td>{$row['telefono']}</td>";
+            echo "<td>{$row['correo']}</td>";
+            echo "<td>{$row['direccion']}</td>";
+            echo "<td>{$row['ocupacion']}</td>";
+            echo "<td class='actions'>";
 
-                                echo "<a href='#' class='edit-btn' onclick=\"openModal({$row['id']}, '{$row['nombre']}', '{$row['genero']}', '{$row['edad']}', '{$row['dui']}', '{$row['telefono']}', '{$row['correo']}', '{$row['direccion']}', '{$row['ocupacion']}');\">
-                                Editar
-                                </a>";
-                                
-                                echo "<a href='vista_adoptantes.php?action=delete&id=" . urlencode($row['id']) . "' class='delete-btn' onclick=\"return confirmarEliminacion(event, this);\" style='color: white; background-color: #dc3545; padding: 5px 10px; border-radius: 5px; text-decoration: none;'>Eliminar</a>";
-                            
-                            
-                                echo "</td>";
-                                echo "</tr>";
-                                
-                            }
-                        } else {
-                            echo "<tr><td colspan='3'>No se encontraron registros</td></tr>";
-                        }
-                    ?>
-                    <?php if ($result->num_rows > 0): ?>
-                        <?php while($row = $result->fetch_assoc()): ?>
-                            <tr>
-                                <td><?php echo $row['id']; ?></td>
-                                <td><?php echo $row['nombre']; ?></td>
-                                <td><?php echo $row['genero']; ?></td>
-                                <td><?php echo $row['edad']; ?></td>
-                                <td><?php echo $row['dui']; ?></td>
-                                <td><?php echo $row['telefono']; ?></td>
-                                <td><?php echo $row['correo']; ?></td>
-                                <td><?php echo $row['direccion']; ?></td>
-                                <td><?php echo $row['ocupacion']; ?></td>
-                                <td class="actions">
-                                    <a href="#" class="edit-btn" onclick="openModal(<?php echo $row['id']; ?>, '<?php echo $row['nombre']; ?>', '<?php echo $row['genero']; ?>', '<?php echo $row['edad']; ?>', '<?php echo $row['dui']; ?>', '<?php echo $row['telefono']; ?>', '<?php echo $row['correo']; ?>', '<?php echo $row['direccion']; ?>', '<?php echo $row['ocupacion']; ?>')">Editar</a>
-                                    <a href="vista_adoptantes.php?action=delete&id=<?php echo urlencode($row['id']); ?>" class="delete-btn" onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?');">Eliminar</a>
-                                </td>
-                            </tr>
-                        <?php endwhile; ?>
-                    <?php else: ?>
-                        <tr>
-                            <td colspan="10">No se encontraron registros.</td>
-                        </tr>
-                    <?php endif; ?>
-                </tbody>
+            // Botón para generar PDF (puedes agregar un icono aquí si es necesario)
+            echo "<a href='generar_pdf.php?id={$row['id']}' title='Generar PDF'><i class='fas fa-file-pdf' style='color: #e3d1d3;'></i></a>";
+
+            // Botón de editar con icono
+            echo "<a href='#' class='edit-btn' onclick=\"openModal({$row['id']}, '{$row['nombre']}', '{$row['genero']}', '{$row['edad']}', '{$row['dui']}', '{$row['telefono']}', '{$row['correo']}', '{$row['direccion']}', '{$row['ocupacion']}');\" title='Editar'>
+                    <i class='fas fa-edit' style='color: #e3d1d3;'></i>
+                  </a>";
+
+            // Botón de eliminar con icono
+            echo "<a href='vista_adoptantes.php?action=delete&id=" . urlencode($row['id']) . "' class='delete-btn' onclick=\"return confirmarEliminacion(event, this);\" title='Eliminar'>
+                    <i class='fas fa-trash' style='color: #e3d1d3;'></i>
+                  </a>";
+
+            echo "</td>";
+            echo "</tr>";
+        }
+    } else {
+        echo "<tr><td colspan='3'>No se encontraron registros</td></tr>";
+    }
+    ?>
+</tbody>
+
+                
             </table>
         </div>
         <!-- Contenedor para los botones en la parte superior -->
