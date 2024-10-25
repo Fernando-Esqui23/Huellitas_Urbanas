@@ -342,7 +342,7 @@ if ($search !== "") {
 
             // Botón de eliminar con icono
             echo "<a href='vista_adoptantes.php?action=delete&id=" . urlencode($row['id']) . "' class='delete-btn' onclick=\"return confirmarEliminacion(event, this);\" title='Eliminar'>
-                    <i class='fas fa-trash' style='color: #e3d1d3;'></i>
+                    <i class='fas fa-trash' style='color: #FF0000;'></i>
                   </a>";
 
             echo "</td>";
