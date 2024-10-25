@@ -337,9 +337,15 @@ if ($search !== "") {
                                 <td><?php echo htmlspecialchars($row['fecha_donacion']); ?></td>
                                 <td><?php echo htmlspecialchars($row['destino_donacion']); ?></td>
                                 <td class="actions">
-                                <a href="#" class="edit-btn" data-id="<?php echo urlencode($row['id']); ?>" data-nombre="<?php echo urlencode($row['nombre']); ?>" data-direccion="<?php echo urlencode($row['direccion']); ?>" data-telefono="<?php echo urlencode($row['telefono']); ?>" data-dui="<?php echo urlencode($row['dui']); ?>" data-correo_electronico="<?php echo urlencode($row['correo_electronico']); ?>" data-monto="<?php echo urlencode($row['monto']); ?>" data-frecuencia_donacion="<?php echo urlencode($row['frecuencia_donacion']); ?>" data-metodo_pago="<?php echo urlencode($row['metodo_pago']); ?>" data-fecha_donacion="<?php echo urlencode($row['fecha_donacion']); ?>" data-destino_donacion="<?php echo urlencode($row['destino_donacion']); ?>"><img src="images/iconoeditar.png" alt="Editar" style="width: 20px; height: 20px;"></a>
-                                <a href="vista_donaciones.php?action=delete&id=<?php echo urlencode($row['id']); ?>" class="delete-btn" onclick="confirmarEliminacion(event, this)">Eliminar</a>
-                                </td>
+    <a href="#" class="edit-btn" data-id="<?php echo urlencode($row['id']); ?>" data-nombre="<?php echo urlencode($row['nombre']); ?>" data-direccion="<?php echo urlencode($row['direccion']); ?>" data-telefono="<?php echo urlencode($row['telefono']); ?>" data-dui="<?php echo urlencode($row['dui']); ?>" data-correo_electronico="<?php echo urlencode($row['correo_electronico']); ?>" data-monto="<?php echo urlencode($row['monto']); ?>" data-frecuencia_donacion="<?php echo urlencode($row['frecuencia_donacion']); ?>" data-metodo_pago="<?php echo urlencode($row['metodo_pago']); ?>" data-fecha_donacion="<?php echo urlencode($row['fecha_donacion']); ?>" data-destino_donacion="<?php echo urlencode($row['destino_donacion']); ?>">
+        <img src="images/iconoeditar.png" alt="Editar" style="width: 20px; height: 20px;">
+    </a>
+    <a href="vista_donaciones.php?action=delete&id=<?php echo urlencode($row['id']); ?>" class="delete-btn" onclick="confirmarEliminacion(event, this)">
+        <img src="images/iconoeliminar.png" alt="Eliminar" style="width: 20px; height: 20px;">
+    </a>
+</td>
+
+                               
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
