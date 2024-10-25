@@ -17,12 +17,12 @@
             <img src="images/iconoadoptante.png" alt="Imagen Pequeña" class="small-image">
             
             <form action="formulario_adoptantes.php" method="post">
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" required>
+                <label for="nombre">Nombre: <span class="obligatorio">*</span>  </label>
+                <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre completo"  required>
         
               
                 <form action="formulario_adoptantes.php" method="post">
-                    <label for="genero">Género:</label>
+                    <label for="genero">Género: <span class="obligatorio">*</span> </label>
                     <select name="genero" id="genero" required>
                         <option value="">Selecciona</option>
                         <option value="masculino">Masculino</option>
