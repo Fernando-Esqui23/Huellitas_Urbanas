@@ -324,39 +324,44 @@ if ($search !== "") {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if ($result && $result->num_rows > 0): ?>
-                        <?php while ($row = $result->fetch_assoc()): ?>
-                            <tr>
-                                <td><?php echo htmlspecialchars($row['id']); ?></td>
-                                <td><?php echo htmlspecialchars($row['nombre']); ?></td>
-                                <td><?php echo htmlspecialchars($row['direccion']); ?></td>
-                                <td><?php echo htmlspecialchars($row['telefono']); ?></td>
-                                <td><?php echo htmlspecialchars($row['dui']); ?></td>
-                                <td><?php echo htmlspecialchars($row['correo_electronico']); ?></td>
-                                <td><?php echo htmlspecialchars($row['monto']); ?></td>
-                                <td><?php echo htmlspecialchars($row['frecuencia_donacion']); ?></td>
-                                <td><?php echo htmlspecialchars($row['metodo_pago']); ?></td>
-                                <td><?php echo htmlspecialchars($row['fecha_donacion']); ?></td>
-                                <td><?php echo htmlspecialchars($row['destino_donacion']); ?></td>
-                                <td class="actions">
-    <a href="#" class="edit-btn" data-id="<?php echo urlencode($row['id']); ?>" data-nombre="<?php echo urlencode($row['nombre']); ?>">
-        <i class="fas fa-edit" style="color: white; font-size: 20px;"></i>
-    </a>
-    <a href="vista_donaciones.php?action=delete&id=<?php echo urlencode($row['id']); ?>" class="delete-btn" onclick="confirmarEliminacion(event, this)">
-        <i class="fas fa-trash" style="color: white; font-size: 20px;"></i>
-    </a>
-</td>
+                <?php
+    if ($result && $result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo "<tr>";
+            echo "<td>{$row['id']}</td>";
+            echo "<td>{$row['nombre']}</td>";
+            echo "<td>{$row['direccion']}</td>";
+            echo "<td>{$row['telefono']}</td>";
+            echo "<td>{$row['dui']}</td>";
+            echo "<td>{$row['correo_electronico']}</td>";
+            echo "<td>{$row['monto']}</td>";
+            echo "<td>{$row['frecuencia_donacion']}</td>";
+            echo "<td>{$row['metodo_pago']}</td>";
+            echo "<td>{$row['fecha_donacion']}</td>";
+            echo "<td>{$row['destino_donacion']}</td>";
+            echo "<td class='actions'>";
 
+            // Botón para generar PDF (puedes agregar un icono aquí si es necesario)
+            echo "<a href='generar_pdf_donaciones.php?id={$row['id']}' title='Generar PDF'><i class='fas fa-file-pdf' style='color: #e3d1d3;'></i></a>";
 
-                               
-                            </tr>
-                        <?php endwhile; ?>
-                    <?php else: ?>
-                        <tr>
-                            <td colspan="12">No se encontraron registros.</td>
-                        </tr>
-                    <?php endif; ?>
-                </tbody>
+            // Botón de editar con icono
+            echo "<a href='#' class='edit-btn' 
+                    data-id='{$row['id']}'data-nombre='{$row['nombre']}' data-direccion='{$row['direccion']}' data-telefono='{$row['telefono']}' data-dui='{$row['dui']}'data-correo_electronico='{$row['correo_electronico']}'data-monto='{$row['monto']}'data-frecuencia_donacion='{$row['frecuencia_donacion']}'data-metodo_pago='{$row['metodo_pago']}'data-fecha_donacion='{$row['fecha_donacion']}'data-destino_donacion='{$row['destino_donacion']}'title='Editar'> <i class='fas fa-edit' style='color: #e3d1d3;'></i>
+                  </a>";
+
+            // Botón de eliminar con icono
+            echo "<a href='vista_donaciones.php?action=delete&id=" . urlencode($row['id']) . "' class='delete-btn' onclick=\"return confirmarEliminacion(event, this);\" title='Eliminar'>
+                    <i class='fas fa-trash' style='color: #e3d1d3;'></i>
+                  </a>";
+
+            echo "</td>";
+            echo "</tr>";
+        }
+    } else {
+        echo "<tr><td colspan='3'>No se encontraron registros</td></tr>";
+    }
+    ?>
+</tbody>
             </table>
         </div>
         
@@ -430,16 +435,16 @@ if ($search !== "") {
     </div>
 
     <script>
-        document.querySelectorAll('.edit-btn').forEach(button => {
+     document.querySelectorAll('.edit-btn').forEach(button => {
     button.addEventListener('click', (event) => {
         event.preventDefault();
         const modal = document.getElementById('editModal');
         document.getElementById('editId').value = button.getAttribute('data-id');
         document.getElementById('editNombre').value = button.getAttribute('data-nombre');
-        document.getElementById('editDireccion').value = decodeURIComponent(button.getAttribute('data-direccion'));
+        document.getElementById('editDireccion').value = button.getAttribute('data-direccion');
         document.getElementById('editTelefono').value = button.getAttribute('data-telefono');
         document.getElementById('editDui').value = button.getAttribute('data-dui');
-        document.getElementById('editCorreoElectronico').value = decodeURIComponent(button.getAttribute('data-correo_electronico'));
+        document.getElementById('editCorreoElectronico').value = button.getAttribute('data-correo_electronico');
         document.getElementById('editMonto').value = button.getAttribute('data-monto');
         document.getElementById('editFrecuenciaDonacion').value = button.getAttribute('data-frecuencia_donacion');
         document.getElementById('editMetodoPago').value = button.getAttribute('data-metodo_pago');
@@ -448,7 +453,6 @@ if ($search !== "") {
         modal.style.display = 'block';
     });
 });
-
 
         function closeModal() {
             var modal = document.getElementById("editModal");
@@ -524,3 +528,6 @@ document.getElementById('regresarBtn').addEventListener('click', function(event)
 
 </body>
 </html>
+<?php
+// Cerrar la conexión
+$conn->close();

@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Adoptantes</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- Incluye SweetAlert2 desde un CDN -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
@@ -16,22 +15,18 @@
         <div class="form-container">
             <img src="images/iconoadoptante.png" alt="Imagen Pequeña" class="small-image">
             
-            <form action="formulario_adoptantes.php" method="post">
-                <label for="nombre">Nombre: <span class="obligatorio">*</span>  </label>
-                <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre completo"  required>
-        
-              
-                <form action="formulario_adoptantes.php" method="post">
-                    <label for="genero">Género: <span class="obligatorio">*</span> </label>
-                    <select name="genero" id="genero" required>
-                        <option value="">Selecciona</option>
-                        <option value="masculino">Masculino</option>
-                        <option value="femenino">Femenino</option>
-                        <option value="otro">Otro</option>
-                    </select>
-
-        
+            <form id="adoptanteForm" action="formulario_adoptantes.php" method="post" onsubmit="return validarEdad()">
+                <label for="nombre">Nombre: <span class="obligatorio">*</span></label>
+                <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre completo" required>
                 
+                <label for="genero">Género: <span class="obligatorio">*</span></label>
+                <select name="genero" id="genero" required>
+                    <option value="">Selecciona</option>
+                    <option value="masculino">Masculino</option>
+                    <option value="femenino">Femenino</option>
+                    <option value="otro">Otro</option>
+                </select>
+
                 <label for="edad">Edad: <span class="obligatorio">*</span></label>
                 <input type="number" id="edad" name="edad" placeholder="Ingrese su edad" required>
                 
@@ -47,7 +42,7 @@
                 <label for="direccion">Dirección: <span class="obligatorio">*</span></label>
                 <input type="text" id="direccion" name="direccion" placeholder="Ingrese su dirección" required>
 
-                <label for="ocupacion">Ocupación: <span class="obligatorio">* </span></label>
+                <label for="ocupacion">Ocupación: <span class="obligatorio">*</span></label>
                 <input type="text" id="ocupacion" name="ocupacion" placeholder="Ingrese su ocupación" required>
 
                 <div class="buttons">
@@ -59,25 +54,39 @@
         </div>
     </div>
 
+
     <script>
+
+function validarEdad() {
+            const edad = document.getElementById('edad').value;
+            if (edad < 18) {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'La edad debe ser 18 años o más.',
+                    icon: 'error',
+                    confirmButtonText: 'Aceptar'
+                });
+                return false; // Evita que el formulario se envíe
+            }
+            return true; // Permite que el formulario se envíe
+        }
+
         // Verificar si la URL contiene el parámetro `success=true`
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('success') === 'true') {
-            // Mostrar la alerta de éxito con SweetAlert2
             Swal.fire({
                 title: '¡Éxito!',
                 text: 'El registro se ha guardado con éxito.',
                 icon: 'success',
                 confirmButtonText: 'Aceptar'
             }).then(() => {
-                // Redirigir a la página de adoptantes después de la alerta
-                window.location.href = 'vista_adoptantes.php';
+                window.location.href ='vista_adoptantes.php';
             });
         }
 
         // Función para limpiar el formulario
         function limpiarFormulario() {
-            const formulario = document.getElementById('formulario');
+            const formulario = document.getElementById('adoptanteForm');
             formulario.reset();
         }
 
