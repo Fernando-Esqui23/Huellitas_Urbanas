@@ -337,16 +337,16 @@ if ($search !== "") {
                                 <td><?php echo $row['detalles_discapacidad']; ?></td>
                                
                                 <td class="actions">
-    <!-- Botón de editar con ícono de Font Awesome -->
-    <a href="#" class="edit-btn" onclick="openModal(<?php echo $row['id']; ?>, '<?php echo $row['tipo_mascota']; ?>', '<?php echo $row['nombre']; ?>', '<?php echo $row['fecha_rescate']; ?>', '<?php echo $row['edad']; ?>', '<?php echo $row['discapacidad']; ?>', '<?php echo $row['detalles_discapacidad']; ?>')">
-        <i class="fas fa-edit"></i>
-    </a>
+                                     <!-- Botón de editar con ícono de Font Awesome -->
+                                    <a href="#" class="edit-btn" onclick="openModal(<?php echo $row['id']; ?>, '<?php echo $row['tipo_mascota']; ?>', '<?php echo $row['nombre']; ?>', '<?php echo $row['fecha_rescate']; ?>', '<?php echo $row['edad']; ?>', '<?php echo $row['discapacidad']; ?>', '<?php echo $row['detalles_discapacidad']; ?>')">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
 
-    <!-- Botón de eliminar con ícono de Font Awesome -->
-    <a href="vista_mascotas.php?action=delete&id=<?php echo urlencode($row['id']); ?>" class="delete-btn" onclick="return confirmarEliminacion(event, this);">
-        <i class="fas fa-trash-alt"></i>
-    </a>
-</td>
+                                    <!-- Botón de eliminar con ícono de Font Awesome -->
+                                    <a href="vista_mascotas.php?action=delete&id=<?php echo urlencode($row['id']); ?>" class="delete-btn" onclick="return confirmarEliminacion(event, this);">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </td>
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>

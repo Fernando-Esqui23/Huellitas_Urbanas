@@ -328,16 +328,16 @@ if ($search !== "") {
                                 <td><?php echo htmlspecialchars($row['usuario']); ?></td>
                                 <td><?php echo htmlspecialchars($row['contraseña']); ?></td>
                                 <td class="actions">
-    <!-- Botón de editar con ícono de Font Awesome -->
-    <a href="#" class="edit-btn" data-id="<?php echo urlencode($row['id']); ?>" data-nombre="<?php echo urlencode($row['nombre']); ?>" data-correo="<?php echo urlencode($row['correo']); ?>" data-usuario="<?php echo urlencode($row['usuario']); ?>" data-contraseña="<?php echo urlencode($row['contraseña']); ?>">
-        <i class="fas fa-edit" style="color: #007bff; font-size: 18px;"></i>
-    </a>
+                                    <!-- Botón de editar con ícono de Font Awesome -->
+                                    <a href="#" class="edit-btn" data-id="<?php echo urlencode($row['id']); ?>" data-nombre="<?php echo urlencode($row['nombre']); ?>" data-correo="<?php echo urlencode($row['correo']); ?>" data-usuario="<?php echo urlencode($row['usuario']); ?>" data-contraseña="<?php echo urlencode($row['contraseña']); ?>">
+                                    <i class="fas fa-edit"></i>
+                                    </a>
 
-    <!-- Botón de eliminar con ícono de Font Awesome -->
-    <a href="vista_usuarios.php?action=delete&id=<?php echo urlencode($row['id']); ?>" class="delete-btn" onclick="return confirmarEliminacion(event, this);">
-        <i class="fas fa-trash-alt" style="color: #e3d1d3; font-size: 18px;"></i>
-    </a>
-</td>
+                                    <!-- Botón de eliminar con ícono de Font Awesome -->
+                                    <a href="vista_usuarios.php?action=delete&id=<?php echo urlencode($row['id']); ?>" class="delete-btn" onclick="return confirmarEliminacion(event, this);">
+                                        <i class="fas fa-trash-alt" style="color: #e3d1d3; font-size: 18px;"></i>
+                                    </a>
+                                </td>
 
                             </tr>
                         <?php endwhile; ?>

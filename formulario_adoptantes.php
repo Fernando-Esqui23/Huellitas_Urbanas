@@ -35,6 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $correo = $_POST['correo'];
     $direccion = $_POST['direccion'];
     $ocupacion = $_POST['ocupacion'];
+    
 
     // Verificar si el correo ya está registrado
     $sql_check = "SELECT * FROM adoptantes WHERE correo=?";
