@@ -127,14 +127,14 @@ if ($search !== "") {
             padding: 6px 12px;
             text-decoration: none;
             color: white;
-            background-color: #04B2D9;
+            background-color: #ADD8E6;
             border-radius: 4px;
         }
         .actions a:hover {
             background-color: #0056b3;
         }
         .actions .delete-btn {
-            background-color: #dc3545; /* Color rojo para el botón de eliminar */
+            background-color: #ADD8E6; /* Color rojo para el botón de eliminar */
         }
         .actions .delete-btn:hover {
             background-color: #c82333;
@@ -344,7 +344,7 @@ if ($search !== "") {
 
                                     <!-- Botón de eliminar con ícono de Font Awesome -->
                                     <a href="vista_mascotas.php?action=delete&id=<?php echo urlencode($row['id']); ?>" class="delete-btn" onclick="return confirmarEliminacion(event, this);">
-                                        <i class="fas fa-trash-alt"></i>
+                                        <i class="fas fa-trash-alt" ></i>
                                     </a>
                                 </td>
                             </tr>

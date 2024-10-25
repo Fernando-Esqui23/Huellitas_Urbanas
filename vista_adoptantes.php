@@ -127,7 +127,7 @@ if ($search !== "") {
             padding: 6px 12px;
             text-decoration: none;
             color: white;
-            background-color: #04B2D9;
+            background-color: #ADD8E6;
             border-radius: 4px;
         }
        
@@ -333,16 +333,16 @@ if ($search !== "") {
             echo "<td class='actions'>";
 
             // Botón para generar PDF (puedes agregar un icono aquí si es necesario)
-            echo "<a href='generar_pdf.php?id={$row['id']}' title='Generar PDF'><i class='fas fa-file-pdf' style='color: #e3d1d3;'></i></a>";
+            echo "<a href='generar_pdf.php?id={$row['id']}' title='Generar PDF'><i class='fas fa-file-pdf' style='color: #000000;'></i></a>";
 
             // Botón de editar con icono
             echo "<a href='#' class='edit-btn' onclick=\"openModal({$row['id']}, '{$row['nombre']}', '{$row['genero']}', '{$row['edad']}', '{$row['dui']}', '{$row['telefono']}', '{$row['correo']}', '{$row['direccion']}', '{$row['ocupacion']}');\" title='Editar'>
-                    <i class='fas fa-edit' style='color: #e3d1d3;'></i>
+                    <i class='fas fa-edit' style='color: #000000;'></i>
                   </a>";
 
             // Botón de eliminar con icono
             echo "<a href='vista_adoptantes.php?action=delete&id=" . urlencode($row['id']) . "' class='delete-btn' onclick=\"return confirmarEliminacion(event, this);\" title='Eliminar'>
-                    <i class='fas fa-trash' style='color: #FF0000;'></i>
+                    <i class='fas fa-trash' style='color: #000000;'></i>
                   </a>";
 
             echo "</td>";

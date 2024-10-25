@@ -126,14 +126,14 @@ if ($search !== "") {
             padding: 6px 12px;
             text-decoration: none;
             color: white;
-            background-color: #04B2D9;
+            background-color: #ADD8E6;
             border-radius: 4px;
         }
         .actions a:hover {
             background-color: #0056b3;
         }
         .actions .delete-btn {
-            background-color: #dc3545; /* Color rojo para el botón de eliminar */
+            background-color: #ADD8E6; /* Color rojo para el botón de eliminar */
         }
         .actions .delete-btn:hover {
             background-color: #c82333;
@@ -342,16 +342,16 @@ if ($search !== "") {
             echo "<td class='actions'>";
 
             // Botón para generar PDF (puedes agregar un icono aquí si es necesario)
-            echo "<a href='generar_pdf_donaciones.php?id={$row['id']}' title='Generar PDF'><i class='fas fa-file-pdf' style='color: #e3d1d3;'></i></a>";
+            echo "<a href='generar_pdf_donaciones.php?id={$row['id']}' title='Generar PDF'><i class='fas fa-file-pdf' style='color: #000000;'></i></a>";
 
             // Botón de editar con icono
             echo "<a href='#' class='edit-btn' 
-                    data-id='{$row['id']}'data-nombre='{$row['nombre']}' data-direccion='{$row['direccion']}' data-telefono='{$row['telefono']}' data-dui='{$row['dui']}'data-correo_electronico='{$row['correo_electronico']}'data-monto='{$row['monto']}'data-frecuencia_donacion='{$row['frecuencia_donacion']}'data-metodo_pago='{$row['metodo_pago']}'data-fecha_donacion='{$row['fecha_donacion']}'data-destino_donacion='{$row['destino_donacion']}'title='Editar'> <i class='fas fa-edit' style='color: #e3d1d3;'></i>
+                    data-id='{$row['id']}'data-nombre='{$row['nombre']}' data-direccion='{$row['direccion']}' data-telefono='{$row['telefono']}' data-dui='{$row['dui']}'data-correo_electronico='{$row['correo_electronico']}'data-monto='{$row['monto']}'data-frecuencia_donacion='{$row['frecuencia_donacion']}'data-metodo_pago='{$row['metodo_pago']}'data-fecha_donacion='{$row['fecha_donacion']}'data-destino_donacion='{$row['destino_donacion']}'title='Editar'> <i class='fas fa-edit' style='color: #000000;'></i>
                   </a>";
 
             // Botón de eliminar con icono
             echo "<a href='vista_donaciones.php?action=delete&id=" . urlencode($row['id']) . "' class='delete-btn' onclick=\"return confirmarEliminacion(event, this);\" title='Eliminar'>
-                    <i class='fas fa-trash' style='color: #e3d1d3;'></i>
+                    <i class='fas fa-trash' style='color: #000000;'></i>
                   </a>";
 
             echo "</td>";
