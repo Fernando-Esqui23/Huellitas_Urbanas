@@ -105,9 +105,21 @@
             });
         }
 
-        // Función para redirigir al menú principal
+        // Función para redirigir al menú principal con alerta de confirmación
         function redirigirAlMenu() {
-            window.location.href = 'main.html'; 
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "Se perderán los datos no guardados.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, regresar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirigir a la página principal si el usuario confirma
+                    window.location.href = 'main.html'; 
+                }
+            });
         }
     </script>
 </body>

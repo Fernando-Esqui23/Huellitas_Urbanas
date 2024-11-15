@@ -71,6 +71,22 @@
                         // Resetea el formulario, limpiando todos los campos
                         formulario.reset();
                     }
+
+                     // Función para redirigir al menú principal con una alerta personalizada
+                     function redirigirAlMenu() {
+                        Swal.fire({
+                            title: '¿Estás seguro?',
+                            text: 'Deseas regresar al menu principal.',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonText: 'Sí, regresar',
+                            cancelButtonText: 'Cancelar'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = 'main.html'; // Redirigir si confirma
+                            }
+                        });
+                    }
         
                 </script>
                 

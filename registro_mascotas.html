@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="styles.css">
     <!-- Incluye SweetAlert2 desde un CDN -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 <body>
     <div class="container">
@@ -101,6 +103,22 @@
                     window.onload = function() {
                         toggleDetalles(false);
                     };
+
+                     // Función para redirigir al menú principal con una alerta personalizada
+                    function redirigirAlMenu() {
+                        Swal.fire({
+                            title: '¿Estás seguro?',
+                            text: 'Deseas regresar al menu principal.',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonText: 'Sí, regresar',
+                            cancelButtonText: 'Cancelar'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = 'main.html'; // Redirigir si confirma
+                            }
+                        });
+                    }
                 </script>
                 
             </form>

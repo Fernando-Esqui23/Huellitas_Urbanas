@@ -8,10 +8,13 @@
     <script defer src="menu.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.min.css">
+
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.min.js"></script>
+
     <style>
-
-    
-
         /* Estilo para el fondo oscuro del modal */
         .modal-overlay {
             position: fixed;
@@ -93,7 +96,6 @@
                 <li><a href="vista_adoptantes.php">Vista de adoptantes</a></li> 
                 <li><a href="registro _donaciones.html">Formulario de Donaciones</a></li>
                 <li><a href="vista_donaciones.php">Vista de Donaciones</a></li> 
-
             </ul>
         </nav>
     </div>
@@ -126,26 +128,30 @@
             }
         }
                 
-                    function closeModal() {
-                document.getElementById('welcomeModal').style.display = 'none';
-            }
-
-           
-
-    </script>
-
-<script>
-    function confirmLogout() {
-        if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
-            logout();
+        function closeModal() {
+            document.getElementById('welcomeModal').style.display = 'none';
         }
-    }
 
-    function logout() {
-        sessionStorage.removeItem('welcomeShown');
-        window.location.href = 'index.html'; // Redirigir a la página de inicio de sesión
-    }
-</script>
-    
+        function confirmLogout() {
+            // Usamos SweetAlert2 para la confirmación
+            Swal.fire({
+                title: '¿Estás seguro de que deseas cerrar sesión?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, cerrar sesión',
+                cancelButtonText: 'Cancelar',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    logout(); // Si el usuario confirma, cerramos la sesión
+                }
+            });
+        }
+
+        function logout() {
+            sessionStorage.removeItem('welcomeShown');
+            window.location.href = 'index.html'; // Redirigir a la página de inicio de sesión
+        }
+    </script>
 </body>
 </html>

@@ -57,12 +57,13 @@
 
     <script>
 
-function validarEdad() {
+        // Función para validar la edad
+        function validarEdad() {
             const edad = document.getElementById('edad').value;
             if (edad < 18) {
                 Swal.fire({
                     title: 'Error',
-                    text: 'La edad debe ser 18 años o más.',
+                    text: 'La edad debe ser de 18 años o más.',
                     icon: 'error',
                     confirmButtonText: 'Aceptar'
                 });
@@ -80,7 +81,7 @@ function validarEdad() {
                 icon: 'success',
                 confirmButtonText: 'Aceptar'
             }).then(() => {
-                window.location.href ='vista_adoptantes.php';
+                window.location.href = 'vista_adoptantes.php'; // Redirigir a la vista de adoptantes
             });
         }
 
@@ -90,10 +91,22 @@ function validarEdad() {
             formulario.reset();
         }
 
+        // Función para redirigir al menú principal con una alerta personalizada
         function redirigirAlMenu() {
-            window.location.href = 'main.html'; 
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: 'Deseas regresar al menu principal.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, regresar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = 'main.html'; // Redirigir si confirma
+                }
+            });
         }
-        
+
     </script>
 </body>
 </html>

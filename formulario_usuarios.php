@@ -47,12 +47,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $result_check = $stmt_check->get_result();
 
         if ($result_check->num_rows > 0) {
-            echo "<script>
-                    alert('El correo electrónico ya está registrado.');
-                    window.location.href = 'registro_usuarios.html';
-                  </script>";
             $stmt_check->close();
             $conn->close();
+            // Mostrar alerta de SweetAlert2
+            echo '<!DOCTYPE html>
+                  <html lang="es">
+                  <head>
+                      <meta charset="UTF-8">
+                      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+                      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+                      <title>Error de Registro</title>
+                  </head>
+                  <body>
+                      <script type="text/javascript">',
+                 'Swal.fire({',
+                 '  icon: "error",',
+                 '  title: "Error!",',
+                 '  text: "El correo electrónico ya está registrado.",',
+                 '}).then((result) => {',
+                 '  if (result.isConfirmed) {',
+                 '    window.location.href = "registro_usuarios.html";',
+                 '  }',
+                 '});',
+                 '</script>
+                  </body>
+                  </html>';
             exit();
         }
         $stmt_check->close();
@@ -63,8 +83,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_param("ssss", $nombre, $correo, $usuario, $contraseña);
     }
 
-     // Ejecutar la consulta y verificar el resultado
-     if ($stmt->execute()) {
+    // Ejecutar la consulta y verificar el resultado
+    if ($stmt->execute()) {
         // Si el registro se inserta correctamente, mostrar la alerta de éxito en el frontend
         echo "<script>
                 window.location.href = 'registro_usuarios.html?success=true';
