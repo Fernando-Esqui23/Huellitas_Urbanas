@@ -81,7 +81,10 @@
             <div class="logout-button">
                 <button class="logout-button" onclick="confirmLogout()">Cerrar Sesión</button>
                 <span class="admin-text">Administrador :</span>
+                <!-- Botón de Ayuda -->
+                <button class="help-button" onclick="openHelpModal()">Ayuda</button>
             </div>
+            
         </div>
         <div class="menu-icon" id="menuToggle">
             ☰
@@ -108,6 +111,46 @@
     <div class="modal-overlay" id="welcomeModal">
         <div class="modal">
             <h2>¡Bienvenidos a Huellitas Urbanas, Has Ingresado Como Administrador!</h2>
+        </div>
+    </div>
+
+
+     <!-- Modal de Ayuda -->
+     <div class="modal-overlay" id="helpModal" style="display: none;">
+        <div class="help-modal">
+            <span class="close-btn" onclick="closeHelpModal()">&#x2716;</span>
+            <div class="help-modal-header">
+                <span>Servicio de Ayuda</span>
+            </div>
+            <!--<div class="search-bar">
+                <input type="text" placeholder="Buscar...">
+            </div>-->
+            <div class="help-grid">
+                <a href="pagina-iniciar-sesion.html" class="help-item">
+                    <i class="fas fa-key"></i>
+                    <p>¿Cómo iniciar sesión?</p>
+                </a>
+                <a href="pagina-registrar-usuario.html" class="help-item">
+                    <i class="fas fa-user"></i>
+                    <p>¿Cómo registrar un nuevo Usuario?</p>
+                </a>
+                <a href="pagina-registrar-mascota.html" class="help-item">
+                    <i class="fas fa-paw"></i>
+                    <p>¿Cómo registrar una mascota?</p>
+                </a>
+                <a href="pagina-donar.html" class="help-item">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <p>¿Cómo puedo donar para apoyar las causas?</p>
+                </a>
+                <a href="pagina-registro-exitoso.html" class="help-item">
+                    <i class="fas fa-check-circle"></i>
+                    <p>¿Cómo sé si el registro de una mascota fue exitoso?</p>
+                </a>
+                <a href="pagina-adoptar-mascota.html" class="help-item">
+                    <i class="fas fa-dog"></i>
+                    <p>¿Cómo adoptar una mascota con Huellitas Urbanas?</p>
+                </a>
+            </div>
         </div>
     </div>
       
@@ -153,5 +196,16 @@
             window.location.href = 'index.html'; // Redirigir a la página de inicio de sesión
         }
     </script>
+
+    <script>
+        function openHelpModal() {
+    document.getElementById('helpModal').style.display = 'flex';
+    }
+
+    function closeHelpModal() {
+        document.getElementById('helpModal').style.display = 'none';
+    }
+    </script>
+
 </body>
 </html>
