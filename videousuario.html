@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ventana con Video</title>
+    <link rel="stylesheet" href="videos-styles.css">
+   
+</head>
+<body>
+    <div class="ventana" id="ventana">
+        <h2>¿Cómo registrar un nuevo Usuario?</h2>
+        <video id="video" controls>
+            <source src="videos/registrarusuario.mp4" type="video/mp4">
+            Tu navegador no soporta el elemento de video.
+        </video>
+        <a href="#" class="cerrar" onclick="irAtras()">Cerrar</a>
+    </div>
+
+    <script>
+        function abrirVentana() {
+            const ventana = document.getElementById('ventana');
+            const video = document.getElementById('video');
+            
+            ventana.style.display = 'block'; // Muestra la ventana
+            video.currentTime = 0; // Reinicia el video al inicio
+            video.play(); // Reproduce el video automáticamente
+        }
+
+        function irAtras() {
+            history.go(-1) // Regresa a la pantalla anterior sin cerrar ninguna modal
+        }
+
+        function cerrarVentana() {
+            const ventana = document.getElementById('ventana');
+            const video = document.getElementById('video');
+            
+            ventana.style.display = 'none'; // Oculta la ventana
+            video.pause(); // Pausa el video cuando se cierra la ventana
+        }
+
+        // Puedes abrir la ventana automáticamente o mediante un evento:
+        // Descomenta la siguiente línea si quieres abrirla al cargar la página.
+        abrirVentana();
+    </script>
+</body>
+</html>
