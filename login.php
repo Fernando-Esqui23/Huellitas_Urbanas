@@ -5,10 +5,10 @@ session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "usuarios";
+$servername = "mysql.webcindario.com";
+$username = "huellitasurb";
+$password = "kurama111023";
+$dbname = "huellitasurb";
 
 // Crea la conexión a la base de datos
 $conn = new mysqli($servername, $username, $password, $dbname);
