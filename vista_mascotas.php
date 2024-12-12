@@ -1,12 +1,12 @@
 <?php
 // Datos de conexión a la base de datos
-$servername = "mysql.webcindario.com";
-$username = "huellitasurb";
-$password = "kurama111023";
-$dbname = "huellitasurb";
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "usuarios";
 
 // Crear conexión
-$conn = new mysqli($servername, $username, $password, $database);
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 // Verificar la conexión
 if ($conn->connect_error) {
